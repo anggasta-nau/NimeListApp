@@ -33,7 +33,7 @@ import coil.compose.rememberImagePainter
 
 
 @Composable
-fun TrendScreenView(
+fun MainScreenView(
     avm: AnimeTrendViewModel,
     navController: NavController
 ) {

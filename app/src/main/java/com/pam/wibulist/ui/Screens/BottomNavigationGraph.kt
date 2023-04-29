@@ -10,7 +10,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,11 +41,11 @@ fun NavigationGraph(
 //            MainScreenView(avm = vm1, avm2 = vm2, navController = navController)
         }
         composable(ButtonNavItem.Search.screen_route) {
-            MainScreenView(avm = vm1,avm2 = vm2, avm3 = vm3, navController = navController)
+            MainScreenView(avm = vm1, avm2 = vm2, avm3 = vm3, navController = navController)
 //            SearchScreen()
         }
         composable(ButtonNavItem.Trend.screen_route) {
-            MainScreenView(avm = vm1,avm2 = vm2, avm3 =vm3, navController = navController)
+            MainScreenView(avm = vm2, navController = navController)
 //            TrendScreenPreview() {
 //                    lContext.startActivity(AnimeProfileActivity.newIntent(lContext, it))
 //            }
