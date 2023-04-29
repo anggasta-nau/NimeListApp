@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">WibuList</string>
+    <string name="LName">Last Name</string>
+    <string name="FName">First Name</string>
+    <string name="Password">Password</string>
+    <string name="CPaswoord">Confirm Password</string>
+    <string name="SignUp">Sign up</string>
+    <string name="Email">Email address</string>
+    <string name="Passwords">Password</string>
+    <string name="Login">Log In</string>
+    <string name="remember_me">Remember me</string>
+    <string name="dnthvacc">Don\'t have an account? Sign up here!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="alrdyhvacc">Already have an account? Log in here!</string>
+    <string name="category">Category</string>
+    <string name="release">Release Schedule</string>
+    <string name="tophits">Top Hits</string>
+    <string name="premium">Premium</string>
+    <string name="genre">Fantasy / Action / Comedy</string>
+    <string name="search">Search</string>
+    <string name="trend">Trending</string>
+    <string name="profile">Profile</string>
+    <string name="myprofile">My Profile</string>
+    <string name="overview">Overviews</string>
+    <string name="animelist">Anime List</string>
+    <string name="following">Following</string>
+    <string name="serach">Search</string>
+    <string name="mostview">Most Viewed</string>
+    <string name="recopmen">Recomendation</string>
+    <string name="kategori">Genres: Action</string>
+    <string name="pplalssrch">People Also Search</string>
+</resources>
