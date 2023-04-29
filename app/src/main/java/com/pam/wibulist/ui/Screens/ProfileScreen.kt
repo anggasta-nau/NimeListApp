@@ -21,6 +21,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,17 +43,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.pam.wibulist.viewModel.sharedViewModel
 
 
 @Composable
 fun ProfileScreen(
     avm: AnimeTrendViewModel,
+    sharedViewModel: sharedViewModel,
     navController: NavController
 ){
     val context = LocalContext.current
     val dataStore = storedUsename(context)
     val savedFirstname = dataStore.getFirstName.collectAsState(initial = "")
     val savedLastname = dataStore.getLastName.collectAsState(initial="")
+    var name by rememberSaveable{ mutableStateOf("") }
+    val scope = rememberCoroutineScope()
+    val setUserInformation = sharedViewModel.person
+    val user = Firebase.auth.currentUser!!
+
+    sharedViewModel.retrieveData(
+        email = setUserInformation!!.email,
+        context = context
+    ){ data ->
+        name = data.name
+    }
+
     LaunchedEffect(
         Unit,
         block = {
@@ -86,10 +107,10 @@ fun ProfileScreen(
                 .padding(top = 15.dp)
         )
         Text(
-            text = "Wibu",
+            text = "$name",
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            color = Color.LightGray,
+            color = Color.Black,
             fontFamily = FontFamily.SansSerif,
             modifier = Modifier
                 .padding(top = 2.dp)

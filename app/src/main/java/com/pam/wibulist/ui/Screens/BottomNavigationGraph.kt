@@ -31,13 +31,12 @@ fun NavigationGraph(
     vm3: AnimeActionViewModel = AnimeActionViewModel(),
 ) {
     val lContext = LocalContext.current
-//    val sharedViewModel: sharedViewModel = viewModel()
     NavHost(
         navController = navController,
         startDestination = ButtonNavItem.Home.screen_route
     ) {
         composable(ButtonNavItem.Home.screen_route) {
-                  HomeScreen(sharedViewModel = sharedViewModel, navController = navController)
+                  HomeScreen(sharedViewModel = sharedViewModel, navController = navController, avm = vm1, avm2 = vm2)
         //            DefaultPreview()
 //            LandingPage(avm = vm1)
 //            MainScreenView(avm = vm1, avm2 = vm2, navController = navController)
@@ -53,7 +52,7 @@ fun NavigationGraph(
 //            }
         }
         composable(ButtonNavItem.Profile.screen_route) {
-            ProfileScreen(avm = vm2, navController = navController)
+            ProfileScreen(avm = vm2, navController = navController, sharedViewModel = sharedViewModel)
         }
         composable(
             route = "Detail" + "?id={id}?title={title}?imgUrl={imgUrl}?genre={genre}?Deskripsi={Deskripsi}",
@@ -147,7 +146,7 @@ fun BottomNavigation(
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun BottomNavigationMainScreenView(navController: NavController, sharedViewModel: sharedViewModel){
+fun BottomNavigationMainScreenView(sharedViewModel: sharedViewModel){
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -156,6 +155,6 @@ fun BottomNavigationMainScreenView(navController: NavController, sharedViewModel
             )
         }
     ) {
-        NavigationGraph(navController = navController, sharedViewModel = sharedViewModel())
+        NavigationGraph(navController = navController, sharedViewModel = sharedViewModel)
     }
 }

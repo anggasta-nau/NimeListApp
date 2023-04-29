@@ -21,9 +21,8 @@ import coil.size.Scale
 fun DetailScreen(id: String?, title: String?,imgUrl: String?, genre: String?, Deskripsi: String? ) {
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -38,45 +37,34 @@ fun DetailScreen(id: String?, title: String?,imgUrl: String?, genre: String?, De
                 ),
                 contentDescription = "$Deskripsi",
                 modifier = Modifier
-                    .height(500.dp)
-                    .width(250.dp)
-                    .clip(RoundedCornerShape(10.dp))
+                    .fillMaxWidth()
+                    .height(400.dp)
+                    .clip(RoundedCornerShape(16.dp))
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "$title",
+                style = MaterialTheme.typography.h5,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "$genre",
+                style = MaterialTheme.typography.subtitle1,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "$Deskripsi",
+                style = MaterialTheme.typography.body1,
+                textAlign = TextAlign.Center
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "$title",
-            style = MaterialTheme.typography.h5,
-            textAlign = TextAlign.Center,
-            fontSize = 20.sp,
-            color = Color.White
-        )
-
-        Spacer(modifier = Modifier.height(15.dp))
-
-        Text(
-            text = "Genre /n "+"$genre",
-            style = MaterialTheme.typography.subtitle1,
-            textAlign = TextAlign.Start,
-            fontSize = 16.sp,
-            color = Color.White
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Text(
-            text = "Rating /n" + "$genre",
-            style = MaterialTheme.typography.subtitle1,
-            textAlign = TextAlign.Start,
-            fontSize = 16.sp,
-            color = Color.White
-        )
-        Text(
-            text = "Descriptive /n "+"$Deskripsi",
-            style = MaterialTheme.typography.subtitle1,
-            textAlign = TextAlign.Start,
-            fontSize = 16.sp,
-            color = Color.White
-        )
     }
 }
