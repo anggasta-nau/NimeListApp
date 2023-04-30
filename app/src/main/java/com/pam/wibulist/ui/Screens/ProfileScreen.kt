@@ -150,7 +150,7 @@ fun ProfileScreen(
 
             when {
                 avm.errorMessage.isEmpty() -> {
-                    AvmList(avl = avm.animeTrendList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi ->
+                    AvmProfileList(avl = avm.animeTrendList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi ->
                         Log.d("ClickItem", "this is anime id: $animeId")
                         navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi")
                     }

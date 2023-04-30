@@ -2,45 +2,38 @@ package com.pam.wibulist.ui.Screens
 
 import com.pam.wibulist.models.AnimeTrendModel
 import com.pam.wibulist.models.AnimeTrendViewModel
-import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.pam.wibulist.models.AnimeTrendingModel
+import com.pam.wibulist.models.AnimeTrendingViewModel
 
 
 @Composable
 fun MainScreenView(
-    avm: AnimeTrendViewModel,
+    avm: AnimeTrendingViewModel,
     navController: NavController
 ) {
     LaunchedEffect(
         Unit,
         block = {
-            avm.getAnimeTrendList()
+            avm.getAnimeTrendingList()
         }
     )
     Column {
@@ -54,9 +47,9 @@ fun MainScreenView(
 
         when {
             avm.errorMessage.isEmpty() -> {
-                AvmList(avl = avm.animeTrendList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi ->
+                AvmList(avl = avm.animeTrendingList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating ->
                     Log.d("ClickItem", "this is anime id: $animeId")
-                    navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi")
+                    navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating")
                 }
             }
             else -> Log.e("AVM", "Something happened")
@@ -64,7 +57,7 @@ fun MainScreenView(
     }
 }
 @Composable
-fun AvmList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String)-> Unit) {
+fun AvmList(avl: List<AnimeTrendingModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String)-> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .fillMaxSize()
@@ -88,7 +81,7 @@ fun AvmList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: String, i
                     .padding(5.dp)
                     .shadow(elevation = 3.dp)
                     .clickable {
-                        itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi)
+                        itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating)
                     },
                 ) {
                     Row(modifier = Modifier
@@ -142,3 +135,4 @@ fun AvmList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: String, i
         }
     }
 }
+

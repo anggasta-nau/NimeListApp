@@ -71,7 +71,7 @@ fun MainScreenView(
         )
 
         Text(
-            text = "Popular",
+            text = "Most Searches",
             Modifier.padding(20.dp),
             fontWeight = FontWeight.W500,
             color = Color.Black,
@@ -106,7 +106,7 @@ fun MainScreenView(
             else -> Log.e("AVM", "Something happened")
         }
         Text(
-            text = "Genres: Action",
+            text = "Older Anime",
             Modifier.padding(20.dp),
             fontWeight = FontWeight.W500,
             color = Color.Black,

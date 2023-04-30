@@ -16,7 +16,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.pam.wibulist.models.AnimeActionViewModel
+import com.pam.wibulist.models.AnimePopularModel
+import com.pam.wibulist.models.AnimePopularViewModel
 import com.pam.wibulist.models.AnimeTrendViewModel
+import com.pam.wibulist.models.AnimeTrendingViewModel
+import com.pam.wibulist.models.AnimeUpcomingViewModel
 import com.pam.wibulist.models.AnimeViewModel
 import com.pam.wibulist.ui.ButtonNavItem
 import com.pam.wibulist.viewModel.sharedViewModel
@@ -28,6 +32,9 @@ fun NavigationGraph(
     vm1: AnimeViewModel = AnimeViewModel(),
     vm2: AnimeTrendViewModel = AnimeTrendViewModel(),
     vm3: AnimeActionViewModel = AnimeActionViewModel(),
+    vm4: AnimeUpcomingViewModel = AnimeUpcomingViewModel(),
+    vm5: AnimePopularViewModel = AnimePopularViewModel(),
+    vm6: AnimeTrendingViewModel = AnimeTrendingViewModel()
 ) {
     val lContext = LocalContext.current
     NavHost(
@@ -35,7 +42,7 @@ fun NavigationGraph(
         startDestination = ButtonNavItem.Home.screen_route
     ) {
         composable(ButtonNavItem.Home.screen_route) {
-                  HomeScreen(sharedViewModel = sharedViewModel, navController = navController, avm = vm1, avm2 = vm2)
+                  HomeScreen(sharedViewModel = sharedViewModel, navController = navController, avm = vm1, avm2 = vm2, avm3 = vm4, avm4 = vm5)
         //            DefaultPreview()
 //            LandingPage(avm = vm1)
 //            MainScreenView(avm = vm1, avm2 = vm2, navController = navController)
@@ -45,13 +52,59 @@ fun NavigationGraph(
 //            SearchScreen()
         }
         composable(ButtonNavItem.Trend.screen_route) {
-            MainScreenView(avm = vm2, navController = navController)
+            MainScreenView(avm = vm6, navController = navController)
 //            TrendScreenPreview() {
 //                    lContext.startActivity(AnimeProfileActivity.newIntent(lContext, it))
 //            }
         }
         composable(ButtonNavItem.Profile.screen_route) {
             ProfileScreen(avm = vm2, navController = navController, sharedViewModel = sharedViewModel)
+        }
+        composable(
+            route = "Detail" + "?id={id}?title={title}?imgUrl={imgUrl}?genre={genre}?Deskripsi={Deskripsi}?rating={rating}",
+            arguments = listOf(
+                navArgument("id"){
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
+                },
+                navArgument("name") {
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
+                }
+                ,
+                navArgument("imgUrl") {
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
+                },
+                navArgument("genre") {
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
+                },
+                navArgument("Deskripsi") {
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
+                },
+                navArgument("rating") {
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
+                }
+            )
+        ) { navBackStackEntry: NavBackStackEntry ->
+            DetailScreen(
+                id=navBackStackEntry.arguments?.getString("id") ,
+                title = navBackStackEntry.arguments?.getString("title") ,
+                imgUrl = navBackStackEntry.arguments?.getString("imgUrl") ,
+                genre = navBackStackEntry.arguments?.getString("genre") ,
+                Deskripsi = navBackStackEntry.arguments?.getString("Deskripsi"),
+                rating = navBackStackEntry.arguments?.getString("rating")
+
+            )
         }
         composable(
             route = "Detail" + "?id={id}?title={title}?imgUrl={imgUrl}?genre={genre}?Deskripsi={Deskripsi}",
@@ -84,12 +137,14 @@ fun NavigationGraph(
                 }
             )
         ) { navBackStackEntry: NavBackStackEntry ->
-            DetailScreen(
+            DetailScreen2(
                 id=navBackStackEntry.arguments?.getString("id") ,
                 title = navBackStackEntry.arguments?.getString("title") ,
                 imgUrl = navBackStackEntry.arguments?.getString("imgUrl") ,
                 genre = navBackStackEntry.arguments?.getString("genre") ,
                 Deskripsi = navBackStackEntry.arguments?.getString("Deskripsi")
+//                rating = navBackStackEntry.arguments?.getString("rating")
+
             )
         }
     }

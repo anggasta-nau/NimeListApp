@@ -41,8 +41,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.pam.wibulist.NavigationGraph.Screens
 import com.pam.wibulist.models.AnimeModel
+import com.pam.wibulist.models.AnimePopularModel
+import com.pam.wibulist.models.AnimePopularViewModel
 import com.pam.wibulist.models.AnimeTrendModel
 import com.pam.wibulist.models.AnimeTrendViewModel
+import com.pam.wibulist.models.AnimeUpcomingModel
+import com.pam.wibulist.models.AnimeUpcomingViewModel
 import com.pam.wibulist.models.AnimeViewModel
 
 
@@ -52,6 +56,8 @@ fun HomeScreen(
     sharedViewModel: sharedViewModel,
     avm: AnimeViewModel,
     avm2: AnimeTrendViewModel,
+    avm3: AnimeUpcomingViewModel,
+    avm4: AnimePopularViewModel
 ){
     var name by rememberSaveable{ mutableStateOf("") }
     val scope = rememberCoroutineScope()
@@ -72,6 +78,8 @@ fun HomeScreen(
         block = {
             avm.getAnimeList()
             avm2.getAnimeTrendList()
+            avm3.getAnimeUpcomingList()
+            avm4.getAnimePopularList()
         }
     )
     Column(
@@ -267,6 +275,42 @@ fun HomeScreen(
                     }
                     else -> Log.e("AVM", "Something happened")
                 }
+
+                Text(
+                    text = "Popular",
+                    modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
+                    fontWeight = FontWeight.W500,
+                    color = Color.Black,
+                    fontFamily = FontFamily.SansSerif,
+                )
+                when {
+                    avm.errorMessage.isEmpty() -> {
+                        AvmPopularList(avl = avm4.animePopularList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating ->
+                            Log.d("ClickItem", "this is anime id: $animeId")
+                            navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating")
+                        }
+                    }
+                    else -> Log.e("AVM", "Something happened")
+                }
+
+                Text(
+                    text = "Upcoming",
+                    modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
+                    fontWeight = FontWeight.W500,
+                    color = Color.Black,
+                    fontFamily = FontFamily.SansSerif,
+                )
+                when {
+                    avm.errorMessage.isEmpty() -> {
+                        AvmUpcomingList(avl = avm3.animeUpcomingList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating ->
+                            Log.d("ClickItem", "this is anime id: $animeId")
+                            navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating")
+                        }
+                    }
+                    else -> Log.e("AVM", "Something happened")
+                }
+
+
             }
         }
     }
@@ -452,6 +496,178 @@ fun AvmTrendsList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: Str
                         .padding(5.dp)
                         .clickable {
                             itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi)
+                        },
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(11, 175, 198).copy(alpha = 0.4f))
+                            .padding(5.dp),
+
+//                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Image(
+                            painter = rememberImagePainter(
+                                data = item.imgUrl,
+                                builder = {
+                                    scale(Scale.FILL)
+//                                    placeholder(coil.base.R.drawable.notification_action_background)
+//                                    transformations(CircleCropTransformation())
+                                }
+                            ),
+                            contentDescription = item.Deskripsi,
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .weight(1f)
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .fillMaxHeight()
+                                //.background(Color(7, 133, 151, 255).copy(alpha = 0.4f))
+                                .weight(0.8f),
+                            verticalArrangement = Arrangement.Center
+                        ) {
+//                            Text(text = item.title)
+                            Text(
+                                text = item.title,
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .padding(4.dp)
+
+                            )
+                            Text(
+                                text = item.genre,
+                                style = MaterialTheme.typography.caption,
+                                modifier = Modifier
+                                    .padding(4.dp)
+                            )
+                            Text(
+                                text = item.Deskripsi,
+                                style = MaterialTheme.typography.body1,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier
+                                    .padding(4.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun AvmUpcomingList(avl: List<AnimeUpcomingModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String)-> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+
+
+    ) {
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            state = rememberLazyListState()
+        ) {
+            itemsIndexed(avl) { index, item ->
+                Card(
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(150.dp)
+                        .padding(5.dp)
+                        .clickable {
+                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating)
+                        },
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(11, 175, 198).copy(alpha = 0.4f))
+                            .padding(5.dp),
+
+//                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Image(
+                            painter = rememberImagePainter(
+                                data = item.imgUrl,
+                                builder = {
+                                    scale(Scale.FILL)
+//                                    placeholder(coil.base.R.drawable.notification_action_background)
+//                                    transformations(CircleCropTransformation())
+                                }
+                            ),
+                            contentDescription = item.Deskripsi,
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .weight(1f)
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .fillMaxHeight()
+                                //.background(Color(7, 133, 151, 255).copy(alpha = 0.4f))
+                                .weight(0.8f),
+                            verticalArrangement = Arrangement.Center
+                        ) {
+//                            Text(text = item.title)
+                            Text(
+                                text = item.title,
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .padding(4.dp)
+
+                            )
+                            Text(
+                                text = item.genre,
+                                style = MaterialTheme.typography.caption,
+                                modifier = Modifier
+                                    .padding(4.dp)
+                            )
+                            Text(
+                                text = item.Deskripsi,
+                                style = MaterialTheme.typography.body1,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier
+                                    .padding(4.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun AvmPopularList(avl: List<AnimePopularModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String)-> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+
+
+    ) {
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            state = rememberLazyListState()
+        ) {
+            itemsIndexed(avl) { index, item ->
+                Card(
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(150.dp)
+                        .padding(5.dp)
+                        .clickable {
+                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating)
                         },
                 ) {
                     Row(
