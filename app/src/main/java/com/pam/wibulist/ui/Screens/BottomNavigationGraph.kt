@@ -1,10 +1,7 @@
 package com.pam.wibulist.ui.Screens
 
 import android.annotation.SuppressLint
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
@@ -15,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.pam.wibulist.NavigationGraph.Screens
 import com.pam.wibulist.models.AnimeActViewModel
 import com.pam.wibulist.models.AnimeActionViewModel
 import com.pam.wibulist.models.AnimeBannerViewModel
@@ -28,6 +26,8 @@ import com.pam.wibulist.models.AnimeTrendingViewModel
 import com.pam.wibulist.models.AnimeUpcomingViewModel
 import com.pam.wibulist.models.AnimeViewModel
 import com.pam.wibulist.ui.ButtonNavItem
+import com.pam.wibulist.ui.theme.backgroundColor
+import com.pam.wibulist.ui.theme.buttonColor
 import com.pam.wibulist.viewModel.sharedViewModel
 
 @Composable
@@ -68,6 +68,18 @@ fun NavigationGraph(
 //                    lContext.startActivity(AnimeProfileActivity.newIntent(lContext, it))
 //            }
         }
+        composable(route = Screens.genreAction.route) {
+            ActionScreenView( navController = navController, avm = vm10)
+        }
+        composable(route = Screens.genreFantasy.route) {
+            FantasyScreenView( navController = navController, avm = vm7)
+        }
+        composable(route = Screens.genreComedy.route) {
+            ComedyScreenView( navController = navController, avm = vm8)
+        }
+        composable(route = Screens.genreSlice.route) {
+            SliceofLifeScreenView( navController = navController, avm = vm9)
+        }
         composable(ButtonNavItem.Profile.screen_route) {
             ProfileScreen(avm = vm2, navController = navController, sharedViewModel = sharedViewModel)
         }
@@ -86,6 +98,11 @@ fun NavigationGraph(
                 }
                 ,
                 navArgument("imgUrl") {
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
+                },
+                navArgument("imgBanner") {
                     type = NavType.StringType
                     defaultValue = "Anime"
                     nullable = true
@@ -180,8 +197,8 @@ fun BottomNavigation(
     )
     androidx.compose.material.BottomNavigation(
         //backgroundColor = colorResource(id = R.color.teal_200),
-        backgroundColor = Color.White,
-        contentColor = Color.Red
+        backgroundColor = MaterialTheme.colors.backgroundColor,
+        contentColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -196,8 +213,8 @@ fun BottomNavigation(
                     Text(text = item.title,
                         fontSize = 9.sp)
                 },
-                selectedContentColor = Color.Blue.copy(0.7f),
-                unselectedContentColor = Color.Blue.copy(0.4f),
+                selectedContentColor = MaterialTheme.colors.buttonColor,
+                unselectedContentColor = Color.White,
                 alwaysShowLabel = true,
                 selected = currentRoute == item.screen_route,
                 onClick = {
