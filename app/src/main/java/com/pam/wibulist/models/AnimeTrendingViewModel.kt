@@ -6,20 +6,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pam.wibulist.repositories.AnimePopularRepository
-import com.pam.wibulist.repositories.AnimeTrendingRepository
+import com.pam.wibulist.repositories.AnimeRepository
 import kotlinx.coroutines.launch
 
 class AnimeTrendingViewModel: ViewModel() {
-    private var _animeTrendingList = mutableStateListOf<AnimeTrendingModel>()
+    private var _animeTrendingList = mutableStateListOf<AnimeBannerModel>()
 
     var errorMessage: String by mutableStateOf("")
-    val animeTrendingList: List<AnimeTrendingModel>
+    val animeTrendingList: List<AnimeBannerModel>
         get() = _animeTrendingList
 
     fun getAnimeTrendingList() {
         viewModelScope.launch {
-            val apiClient = AnimeTrendingRepository.getClient()
+            val apiClient = AnimeRepository.getClient()
             try {
                 _animeTrendingList.clear()
                 _animeTrendingList.addAll(apiClient.getTrendingAnime())

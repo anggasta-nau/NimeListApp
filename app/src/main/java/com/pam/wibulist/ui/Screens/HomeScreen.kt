@@ -3,7 +3,6 @@ package com.pam.wibulist.ui.Screens
 import android.util.Log
 import com.pam.wibulist.viewModel.sharedViewModel
 import com.pam.wibulist.R
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,22 +13,16 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,13 +32,12 @@ import coil.compose.rememberImagePainter
 import coil.size.Scale
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.pam.wibulist.NavigationGraph.Screens
+import com.pam.wibulist.models.AnimeBannerModel
+import com.pam.wibulist.models.AnimeBannerViewModel
+import com.pam.wibulist.models.AnimeFullModel
 import com.pam.wibulist.models.AnimeModel
-import com.pam.wibulist.models.AnimePopularModel
 import com.pam.wibulist.models.AnimePopularViewModel
-import com.pam.wibulist.models.AnimeTrendModel
 import com.pam.wibulist.models.AnimeTrendViewModel
-import com.pam.wibulist.models.AnimeUpcomingModel
 import com.pam.wibulist.models.AnimeUpcomingViewModel
 import com.pam.wibulist.models.AnimeViewModel
 
@@ -57,7 +49,8 @@ fun HomeScreen(
     avm: AnimeViewModel,
     avm2: AnimeTrendViewModel,
     avm3: AnimeUpcomingViewModel,
-    avm4: AnimePopularViewModel
+    avm4: AnimePopularViewModel,
+    avm5: AnimeBannerViewModel
 ){
     var name by rememberSaveable{ mutableStateOf("") }
     val scope = rememberCoroutineScope()
@@ -80,12 +73,13 @@ fun HomeScreen(
             avm2.getAnimeTrendList()
             avm3.getAnimeUpcomingList()
             avm4.getAnimePopularList()
+            avm5.getAnimeBannerList()
         }
     )
     Column(
         modifier = Modifier
             .verticalScroll((rememberScrollState()))
-            .height(1050.dp)) {
+            .height(1450.dp)) {
         Column{
             TopAppBar(
                 backgroundColor = Color.White,
@@ -103,54 +97,20 @@ fun HomeScreen(
                     )
                 }
             }
-//            Column(
-//                modifier = Modifier
-//                    .padding(20.dp),
-//            ) {
-//                Card(
-//                    elevation = 10.dp,
-//                    shape = RoundedCornerShape(10.dp),
-//                ) {
-//                    Image(
-//                        painter = painterResource(id = R.drawable.bofuri),
-//                        contentDescription = null,
-//                        contentScale = ContentScale.FillBounds,
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .height(250.dp)
-//                    )
-//                }
-//            }
-//            Column(
-//                modifier = Modifier
-//                    .padding(20.dp),
-//                verticalArrangement = Arrangement.spacedBy(0.dp)
-//            ) {
-//                Row(
-//                    modifier = Modifier
-//                        .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
-//                ) {
-//                    Text(
-//                        text = "Bofuri: I Don't Want to Get Hurt",
-//                        fontWeight = FontWeight.W500,
-//                        color = Color.Black,
-//                        fontFamily = FontFamily.SansSerif,
-//                    )
-//                    Image(
-//                        painter = painterResource(id = R.drawable.bookmark),
-//                        contentDescription = null,
-//                        contentScale = ContentScale.FillBounds,
-//                        modifier = Modifier
-//                            .size(width = 30.dp, height = 30.dp)
-//                    )
-//                }
-//                Text(
-//                    text = "Fantasy / Action / Comedy",
-//                    fontWeight = FontWeight.W500,
-//                    color = Color.Gray,
-//                    fontFamily = FontFamily.SansSerif,
-//                )
-//            }
+            when {
+                avm5.animeBannerList.isNotEmpty() -> {
+                    val randomIndex = (0 until avm5.animeBannerList.size).random()
+                    val anime = avm5.animeBannerList[randomIndex]
+                    AvmHero(anime) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating, animeRelease, animeBanner ->
+                        Log.d("ClickItem", "this is anime id: $animeId")
+                        navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
+                    }
+                    Log.d("hero-item", "$anime")
+                }
+                else -> {
+                    Text(text = "No data available")
+                }
+            }
 
             Column(
                 modifier = Modifier
@@ -242,6 +202,7 @@ fun HomeScreen(
                     })
             }
             Column() {
+
                 Text(
                     text = "For You",
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
@@ -285,9 +246,9 @@ fun HomeScreen(
                 )
                 when {
                     avm.errorMessage.isEmpty() -> {
-                        AvmPopularList(avl = avm4.animePopularList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating ->
+                        AvmPopularList(avl = avm4.animePopularList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating, animeRelease ->
                             Log.d("ClickItem", "this is anime id: $animeId")
-                            navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating")
+                            navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
                         }
                     }
                     else -> Log.e("AVM", "Something happened")
@@ -302,90 +263,21 @@ fun HomeScreen(
                 )
                 when {
                     avm.errorMessage.isEmpty() -> {
-                        AvmUpcomingList(avl = avm3.animeUpcomingList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating ->
+                        AvmUpcomingList(avl = avm3.animeUpcomingList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating, animeRelease ->
                             Log.d("ClickItem", "this is anime id: $animeId")
-                            navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating")
+                            navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
                         }
                     }
                     else -> Log.e("AVM", "Something happened")
                 }
 
 
+
+
             }
         }
     }
 
-//    LaunchedEffect(
-//        Unit,
-//        block = {
-//            avm.getAnimeList()
-//            avm2.getAnimeTrendList()
-//        }
-//    )
-//    Box(modifier = Modifier
-//        .fillMaxSize()
-//        .background(Color(4, 1, 18))){
-//        Column(modifier = Modifier
-//            .padding(20.dp)
-//        ) {
-//            Row(
-//                horizontalArrangement = Arrangement.Center,
-//                modifier = Modifier
-//                    .padding(top = 15.dp))
-//            {
-//                Text(
-//                    text = "WibuList",
-//                    fontSize = 26.sp,
-//                    color = Color.White
-//                )
-//            }
-//
-//            Spacer(modifier = Modifier.height(15.dp))
-//            Text(
-//                text ="Hi $name",
-//                fontSize = 20.sp,
-//                color = Color.White,
-//                fontFamily = FontFamily.SansSerif,
-//                fontWeight = FontWeight.SemiBold,
-//            )
-//            Spacer(modifier = Modifier.height(5.dp))
-//            Text(
-//                text = "How Are You?",
-//                fontSize = 20.sp,
-//                color = Color.White,
-//                fontFamily = FontFamily.SansSerif,
-//                fontWeight = FontWeight.SemiBold,
-//            )
-//
-//            //Randomize Card
-//            Spacer(modifier = Modifier.height(20.dp))
-//            Card(
-//                elevation = 10.dp,
-//                shape = RoundedCornerShape(10.dp)
-//            ) {
-//                Image(
-//                    painter = painterResource(id = R.drawable.img),
-//                    contentDescription = null,
-//                    contentScale = ContentScale.FillBounds,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .height(150.dp)
-//                )
-//            }
-//
-//            Spacer(modifier = Modifier.height(20.dp))
-//            //Trending Now
-//            Text(
-//                text ="Trending Now",
-//                fontSize = 20.sp,
-//                color = Color.White,
-//                fontFamily = FontFamily.SansSerif,
-//                fontWeight = FontWeight.SemiBold
-//            )
-//            Spacer(modifier = Modifier.height(20.dp))
-//            Screens.bottomNavGr
-//        }
-//    }
 }
 
 @Composable
@@ -475,7 +367,7 @@ fun AvmList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, imgUrl
 }
 
 @Composable
-fun AvmTrendsList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String)-> Unit) {
+fun AvmTrendsList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String)-> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -560,8 +452,9 @@ fun AvmTrendsList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: Str
     }
 }
 
+/// SESUAI DESIGN FIGMA MULAI INI
 @Composable
-fun AvmUpcomingList(avl: List<AnimeUpcomingModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String)-> Unit) {
+fun AvmUpcomingList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String, release:String)-> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -581,7 +474,7 @@ fun AvmUpcomingList(avl: List<AnimeUpcomingModel>, itemClick: (index: Int, title
                         .height(150.dp)
                         .padding(5.dp)
                         .clickable {
-                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating)
+                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating, item.release)
                         },
                 ) {
                     Row(
@@ -647,7 +540,7 @@ fun AvmUpcomingList(avl: List<AnimeUpcomingModel>, itemClick: (index: Int, title
 }
 
 @Composable
-fun AvmPopularList(avl: List<AnimePopularModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String)-> Unit) {
+fun AvmPopularList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String, release:String)-> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -667,7 +560,7 @@ fun AvmPopularList(avl: List<AnimePopularModel>, itemClick: (index: Int, title: 
                         .height(150.dp)
                         .padding(5.dp)
                         .clickable {
-                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating)
+                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating, item.release)
                         },
                 ) {
                     Row(
@@ -731,3 +624,58 @@ fun AvmPopularList(avl: List<AnimePopularModel>, itemClick: (index: Int, title: 
         }
     }
 }
+
+@Composable
+fun AvmHero(anime: AnimeBannerModel, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String, release:String, imgBanner:String)-> Unit){
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .clickable {itemClick(anime.id, anime.title, anime.imgUrl, anime.genre, anime.Deskripsi, anime.rating, anime.release, anime.imgBanner) }
+    ){
+        Column {
+            Image(
+                painter = rememberImagePainter(
+                    data = anime.imgBanner,
+                    builder = {
+                        scale(Scale.FILL)
+                        placeholder(coil.compose.base.R.drawable.notification_action_background)
+//                        transformations(CircleCropTransformation())
+                    }
+                ),
+                contentDescription = anime.Deskripsi,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(16f/9f)
+            )
+            Column(modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth()
+            ) {
+                Text(text = anime.title)
+                Text(
+                    text = anime.title,
+                    style = MaterialTheme.typography.subtitle1,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = anime.genre,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier
+                        .background(
+                            Color.LightGray
+                        )
+                        .padding(4.dp)
+                )
+                Text(
+                    text = anime.Deskripsi,
+                    style = MaterialTheme.typography.body1,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+    }
+}
+
+

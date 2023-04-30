@@ -2,7 +2,8 @@ package com.pam.wibulist.models
 
 import com.google.gson.annotations.SerializedName
 
-data class AnimeActionModel(
+class AnimeFullModel (
+
     @SerializedName("id")
     val id: Int,
 
@@ -12,9 +13,17 @@ data class AnimeActionModel(
     @SerializedName("imgUrl")
     val imgUrl: String,
 
+    @SerializedName("genre")
+    val genre: String,
+
     @SerializedName("Deskripsi")
     val Deskripsi: String,
 
-    @SerializedName("genre")
-    val genre: String
-)
+    @SerializedName("rating")
+    val rating: String,
+
+    @SerializedName("release")
+    val release: String,
+
+
+    )

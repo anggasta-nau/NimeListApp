@@ -18,7 +18,7 @@ import coil.compose.rememberImagePainter
 import coil.size.Scale
 
 @Composable
-fun DetailScreen(id: String?, title: String?,imgUrl: String?, genre: String?, Deskripsi: String?, rating: String? ) {
+fun DetailScreen(id: String?, title: String?,imgUrl: String?, genre: String?, Deskripsi: String?, rating: String?, release: String? ) {
 
     Box(
         contentAlignment = Alignment.Center,
@@ -47,6 +47,14 @@ fun DetailScreen(id: String?, title: String?,imgUrl: String?, genre: String?, De
             Text(
                 text = "$title",
                 style = MaterialTheme.typography.h5,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "$release",
+                style = MaterialTheme.typography.body1,
                 textAlign = TextAlign.Center
             )
 

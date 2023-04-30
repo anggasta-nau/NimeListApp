@@ -10,10 +10,10 @@ import com.pam.wibulist.repositories.AnimeRepository
 import kotlinx.coroutines.launch
 
 class AnimeActionViewModel: ViewModel() {
-    private var _animeActionList = mutableStateListOf<AnimeActionModel>()
+    private var _animeActionList = mutableStateListOf<AnimeModel>()
 
     var errorMessage: String by mutableStateOf("")
-    val animeActionList: List<AnimeActionModel>
+    val animeActionList: List<AnimeModel>
         get() = _animeActionList
 
     fun getAnimeActionList() {

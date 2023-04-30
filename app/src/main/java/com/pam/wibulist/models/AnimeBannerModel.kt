@@ -2,7 +2,7 @@ package com.pam.wibulist.models
 
 import com.google.gson.annotations.SerializedName
 
-class AnimeTrendingModel (
+class AnimeBannerModel(
 
     @SerializedName("id")
     val id: Int,
@@ -20,6 +20,13 @@ class AnimeTrendingModel (
     val Deskripsi: String,
 
     @SerializedName("rating")
-    val rating: String
+    val rating: String,
 
-)
+    @SerializedName("release")
+    val release: String,
+
+    @SerializedName("imgBanner")
+    val imgBanner: String
+
+
+    )

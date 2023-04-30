@@ -1,6 +1,5 @@
 package com.pam.wibulist.ui.Screens
 
-import com.pam.wibulist.models.AnimeTrendModel
 import com.pam.wibulist.models.AnimeTrendViewModel
 import com.pam.wibulist.ui.data.storedUsename
 import com.pam.wibulist.R
@@ -15,7 +14,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -29,22 +27,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.pam.wibulist.models.AnimeModel
 import com.pam.wibulist.viewModel.sharedViewModel
 
 
@@ -162,7 +158,7 @@ fun ProfileScreen(
 }
 
 @Composable
-fun AvmProfileList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String)-> Unit) {
+fun AvmProfileList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String)-> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(10.dp)
@@ -235,13 +231,3 @@ fun AvmProfileList(avl: List<AnimeTrendModel>, itemClick: (index: Int, title: St
     }
 }
 
-
-//@Composable
-//@Preview
-//fun ProfileScreenPreview() {
-//    val avm = AnimeTrendViewModel()
-//    TTSTheme() {
-//        ProfileScreen(avm)
-//
-//    }
-//}

@@ -15,9 +15,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.pam.wibulist.models.AnimeActViewModel
 import com.pam.wibulist.models.AnimeActionViewModel
-import com.pam.wibulist.models.AnimePopularModel
+import com.pam.wibulist.models.AnimeBannerViewModel
+import com.pam.wibulist.models.AnimeComedyViewModel
+import com.pam.wibulist.models.AnimeFantasyViewModel
 import com.pam.wibulist.models.AnimePopularViewModel
+import com.pam.wibulist.models.AnimeSearchViewModel
+import com.pam.wibulist.models.AnimeSliceViewModel
 import com.pam.wibulist.models.AnimeTrendViewModel
 import com.pam.wibulist.models.AnimeTrendingViewModel
 import com.pam.wibulist.models.AnimeUpcomingViewModel
@@ -34,7 +39,13 @@ fun NavigationGraph(
     vm3: AnimeActionViewModel = AnimeActionViewModel(),
     vm4: AnimeUpcomingViewModel = AnimeUpcomingViewModel(),
     vm5: AnimePopularViewModel = AnimePopularViewModel(),
-    vm6: AnimeTrendingViewModel = AnimeTrendingViewModel()
+    vm6: AnimeTrendingViewModel = AnimeTrendingViewModel(),
+    vm7: AnimeFantasyViewModel = AnimeFantasyViewModel(),
+    vm8: AnimeComedyViewModel = AnimeComedyViewModel(),
+    vm9: AnimeSliceViewModel = AnimeSliceViewModel(),
+    vm10: AnimeActViewModel = AnimeActViewModel(),
+    vm11: AnimeBannerViewModel = AnimeBannerViewModel(),
+    vm12: AnimeSearchViewModel = AnimeSearchViewModel()
 ) {
     val lContext = LocalContext.current
     NavHost(
@@ -42,13 +53,13 @@ fun NavigationGraph(
         startDestination = ButtonNavItem.Home.screen_route
     ) {
         composable(ButtonNavItem.Home.screen_route) {
-                  HomeScreen(sharedViewModel = sharedViewModel, navController = navController, avm = vm1, avm2 = vm2, avm3 = vm4, avm4 = vm5)
+                  HomeScreen(sharedViewModel = sharedViewModel, navController = navController, avm = vm1, avm2 = vm2, avm3 = vm4, avm4 = vm5, avm5 = vm11)
         //            DefaultPreview()
 //            LandingPage(avm = vm1)
 //            MainScreenView(avm = vm1, avm2 = vm2, navController = navController)
         }
         composable(ButtonNavItem.Search.screen_route) {
-            MainScreenView(avm = vm1, avm2 = vm2, avm3 = vm3, navController = navController)
+            MainScreenView(avm = vm12, navController = navController)
 //            SearchScreen()
         }
         composable(ButtonNavItem.Trend.screen_route) {
@@ -61,7 +72,7 @@ fun NavigationGraph(
             ProfileScreen(avm = vm2, navController = navController, sharedViewModel = sharedViewModel)
         }
         composable(
-            route = "Detail" + "?id={id}?title={title}?imgUrl={imgUrl}?genre={genre}?Deskripsi={Deskripsi}?rating={rating}",
+            route = "Detail" + "?id={id}?title={title}?imgUrl={imgUrl}?genre={genre}?Deskripsi={Deskripsi}?rating={rating}?release={release}",
             arguments = listOf(
                 navArgument("id"){
                     type = NavType.StringType
@@ -93,6 +104,11 @@ fun NavigationGraph(
                     type = NavType.StringType
                     defaultValue = "Anime"
                     nullable = true
+                },
+                navArgument("release") {
+                    type = NavType.StringType
+                    defaultValue = "Anime"
+                    nullable = true
                 }
             )
         ) { navBackStackEntry: NavBackStackEntry ->
@@ -102,7 +118,9 @@ fun NavigationGraph(
                 imgUrl = navBackStackEntry.arguments?.getString("imgUrl") ,
                 genre = navBackStackEntry.arguments?.getString("genre") ,
                 Deskripsi = navBackStackEntry.arguments?.getString("Deskripsi"),
-                rating = navBackStackEntry.arguments?.getString("rating")
+                rating = navBackStackEntry.arguments?.getString("rating"),
+                release = navBackStackEntry.arguments?.getString("release")
+
 
             )
         }

@@ -4,15 +4,26 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -25,24 +36,24 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import coil.size.Scale
 import com.pam.wibulist.models.AnimeBannerModel
+import com.pam.wibulist.models.AnimeFantasyViewModel
 import com.pam.wibulist.models.AnimeFullModel
-import com.pam.wibulist.models.AnimeTrendingViewModel
-
+import com.pam.wibulist.models.AnimeSliceViewModel
 
 @Composable
-fun MainScreenView(
-    avm: AnimeTrendingViewModel,
+fun SliceofLifeScreenView(
+    avm: AnimeSliceViewModel,
     navController: NavController
 ) {
     LaunchedEffect(
         Unit,
         block = {
-            avm.getAnimeTrendingList()
+            avm.getAnimeSliceList()
         }
     )
     Column {
         Text(
-            text = "Top Anime",
+            text = "Slice Of Life Anime",
             fontSize = 24.sp,
             fontWeight= FontWeight.SemiBold,
             fontFamily = FontFamily.SansSerif,
@@ -51,7 +62,7 @@ fun MainScreenView(
 
         when {
             avm.errorMessage.isEmpty() -> {
-                AvmList(avl = avm.animeTrendingList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating, animeRelease ->
+                AvmSliceofLifeList(avl = avm.animeSliceList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating, animeRelease ->
                     Log.d("ClickItem", "this is anime id: $animeId")
                     navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
                 }
@@ -61,7 +72,7 @@ fun MainScreenView(
     }
 }
 @Composable
-fun AvmList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String, release:String)-> Unit) {
+fun AvmSliceofLifeList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String, release:String)-> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .fillMaxSize()
@@ -139,4 +150,3 @@ fun AvmList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, 
 
     }
 }
-

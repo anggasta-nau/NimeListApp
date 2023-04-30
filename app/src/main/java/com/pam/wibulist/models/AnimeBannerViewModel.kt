@@ -9,19 +9,19 @@ import androidx.lifecycle.viewModelScope
 import com.pam.wibulist.repositories.AnimeRepository
 import kotlinx.coroutines.launch
 
-class AnimePopularViewModel: ViewModel() {
-    private var _animePopularList = mutableStateListOf<AnimeFullModel>()
+class AnimeBannerViewModel: ViewModel() {
+    private var _animeBannerList = mutableStateListOf<AnimeBannerModel>()
 
     var errorMessage: String by mutableStateOf("")
-    val animePopularList: List<AnimeFullModel>
-        get() = _animePopularList
+    val animeBannerList: List<AnimeBannerModel>
+        get() = _animeBannerList
 
-    fun getAnimePopularList() {
+    fun getAnimeBannerList() {
         viewModelScope.launch {
             val apiClient = AnimeRepository.getClient()
             try {
-                _animePopularList.clear()
-                _animePopularList.addAll(apiClient.getPopularAnime())
+                _animeBannerList.clear()
+                _animeBannerList.addAll(apiClient.getBannerAnime())
             }
             catch (e: Exception) {
                 errorMessage = e.message!!

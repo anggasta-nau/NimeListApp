@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pam.wibulist.models.AnimeActionViewModel
+import com.pam.wibulist.models.AnimeBannerViewModel
 import com.pam.wibulist.models.AnimePopularViewModel
 import com.pam.wibulist.models.AnimeTrendViewModel
 import com.pam.wibulist.models.AnimeUpcomingViewModel
@@ -21,7 +22,8 @@ fun NavigationGraph(
     vm2: AnimeTrendViewModel = AnimeTrendViewModel(),
     vm3: AnimeActionViewModel = AnimeActionViewModel(),
     vm4: AnimeUpcomingViewModel = AnimeUpcomingViewModel(),
-    vm5: AnimePopularViewModel = AnimePopularViewModel()
+    vm5: AnimePopularViewModel = AnimePopularViewModel(),
+    vm6: AnimeBannerViewModel = AnimeBannerViewModel()
 ) {
     val sharedViewModel: sharedViewModel = viewModel()
     NavHost(
@@ -30,7 +32,7 @@ fun NavigationGraph(
     ) {
 
         composable(route = Screens.HomeScreen.route) {
-           HomeScreen(navController = navController, sharedViewModel = sharedViewModel, avm = vm1, avm2 = vm2, avm3 = vm4, avm4 = vm5)
+           HomeScreen(navController = navController, sharedViewModel = sharedViewModel, avm = vm1, avm2 = vm2, avm3 = vm4, avm4 = vm5, avm5 = vm6)
         }
 
         composable(route = Screens.bottomNavGr.route) {

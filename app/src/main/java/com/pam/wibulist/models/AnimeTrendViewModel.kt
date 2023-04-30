@@ -10,10 +10,10 @@ import com.pam.wibulist.repositories.AnimeRepository
 import kotlinx.coroutines.launch
 
 class AnimeTrendViewModel: ViewModel() {
-    private var _animeTrendList = mutableStateListOf<AnimeTrendModel>()
+    private var _animeTrendList = mutableStateListOf<AnimeModel>()
 
     var errorMessage: String by mutableStateOf("")
-    val animeTrendList: List<AnimeTrendModel>
+    val animeTrendList: List<AnimeModel>
         get() = _animeTrendList
 
     fun getAnimeTrendList() {
