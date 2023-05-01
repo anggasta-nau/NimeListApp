@@ -13,11 +13,14 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -32,6 +35,7 @@ import coil.compose.rememberImagePainter
 import coil.size.Scale
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.pam.wibulist.NavigationGraph.Screens
 import com.pam.wibulist.models.AnimeBannerModel
 import com.pam.wibulist.models.AnimeBannerViewModel
 import com.pam.wibulist.models.AnimeFullModel
@@ -40,6 +44,8 @@ import com.pam.wibulist.models.AnimePopularViewModel
 import com.pam.wibulist.models.AnimeTrendViewModel
 import com.pam.wibulist.models.AnimeUpcomingViewModel
 import com.pam.wibulist.models.AnimeViewModel
+import com.pam.wibulist.ui.theme.backgroundColor
+import com.pam.wibulist.ui.theme.buttonColor
 
 
 @Composable
@@ -79,24 +85,21 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .verticalScroll((rememberScrollState()))
-            .height(1450.dp)) {
-        Column{
-            TopAppBar(
-                backgroundColor = Color.White,
-                contentColor = Color.Black,
-            ){
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
-                ){
-                    Text(
-                        text = "$name",
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.Black,
-                        fontSize = 20.sp,
-                    )
-                }
-            }
+            .height(1499.dp)) {
+        Column(
+            modifier = Modifier
+                .background(MaterialTheme.colors.backgroundColor)
+        ){
+            Text(
+                text = "NiList",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White,
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .padding(20.dp, top = 10.dp)
+            )
+
             when {
                 avm5.animeBannerList.isNotEmpty() -> {
                     val randomIndex = (0 until avm5.animeBannerList.size).random()
@@ -112,102 +115,117 @@ fun HomeScreen(
                 }
             }
 
-            Column(
-                modifier = Modifier
-                    .padding(top = 20.dp)
-            ) {
-                LazyVerticalGrid(columns = GridCells.Adaptive(90.dp),
-                    content = {
-                        items(1) {
-                            Box(
-                                modifier = Modifier
-                                    .size(width = 30.dp, height = 50.dp)
-                                    .padding(start = 10.dp)
-                            )
-                            {
-                                Image(
-                                    painterResource(id = R.drawable.square), "title",
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(30.dp)
-
-                                )
-                                Text(
-                                    text = "Category", modifier = Modifier
-                                        .padding(top = 30.dp)
-                                        .padding(start = 20.dp), fontSize = 12.sp, color = Color.Gray
-                                )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Genre's",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White,
+                modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 5.dp, bottom = 10.dp)
+            )
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp),
+            ){
+                items(1){
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(MaterialTheme.colors.buttonColor),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        TextButton(
+                            modifier = Modifier
+                                .background(Color.Transparent),
+                            onClick = {
+                                navController.navigate(route = Screens.genreAction.route)
                             }
-                        }
-                        items(1) {
-                            Box(
-                                modifier = Modifier
-                                    .size(width = 30.dp, height = 50.dp)
-                                    .padding(start = 5.dp)
+                        ) {
+                            Text(
+                                text = "Action",
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(2.dp)
                             )
-                            {
-                                Image(
-                                    painterResource(id = R.drawable.time), "title",
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(30.dp)
-                                )
-                                Text(
-                                    text = "Release", modifier = Modifier
-                                        .padding(top = 30.dp)
-                                        .padding(start = 30.dp), fontSize = 12.sp, color = Color.Gray
-                                )
-                            }
                         }
-                        items(1) {
-                            Box(
-                                modifier = Modifier
-                                    .size(width = 30.dp, height = 50.dp)
-                                    .padding(start = 5.dp)
+                    }
+                }
+                items(1){
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(MaterialTheme.colors.buttonColor),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        TextButton(
+                            modifier = Modifier
+                                .background(Color.Transparent),
+                            onClick = { navController.navigate(route = Screens.genreFantasy.route) }
+                        ) {
+                            Text(
+                                text = "Fantasy",
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(2.dp)
                             )
-                            {
-                                Image(
-                                    painterResource(id = R.drawable.medal), "title",
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(30.dp)
-                                )
-                                Text(
-                                    text = "Top Hits", modifier = Modifier
-                                        .padding(top = 30.dp)
-                                        .padding(start = 27.dp), fontSize = 12.sp, color = Color.Gray
-                                )
-                            }
                         }
-                        items(1) {
-                            Box(
-                                modifier = Modifier
-                                    .size(width = 30.dp, height = 50.dp)
-                                    .padding(start = 10.dp)
+                    }
+                }
+                items(1){
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(MaterialTheme.colors.buttonColor),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        TextButton(
+                            modifier = Modifier
+                                .background(Color.Transparent),
+                            onClick = { navController.navigate(route = Screens.genreComedy.route) }
+                        ) {
+                            Text(
+                                text = "Comedy",
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(2.dp)
                             )
-                            {
-                                Image(
-                                    painterResource(id = R.drawable.diamonds), "title",
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(30.dp)
-                                )
-                                Text(
-                                    text = "Premium", modifier = Modifier
-                                        .padding(top = 30.dp)
-                                        .padding(start = 27.dp), fontSize = 12.sp, color = Color.Gray
-                                )
-                            }
                         }
-                    })
+                    }
+                }
+                items(1){
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(MaterialTheme.colors.buttonColor),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        TextButton(
+                            modifier = Modifier
+                                .background(Color.Transparent),
+                            onClick = { navController.navigate(route = Screens.genreSlice.route) }
+                        ) {
+                            Text(
+                                text = "Slice of Life",
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(2.dp)
+                            )
+                        }
+                    }
+                }
             }
             Column() {
 
                 Text(
                     text = "For You",
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
-                    fontWeight = FontWeight.W500,
-                    color = Color.Black,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 20.sp,
+                    color = Color.White,
                     fontFamily = FontFamily.SansSerif,
                 )
                 when {
@@ -223,8 +241,9 @@ fun HomeScreen(
                 Text(
                     text = "Trend",
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
-                    fontWeight = FontWeight.W500,
-                    color = Color.Black,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 20.sp,
+                    color = Color.White,
                     fontFamily = FontFamily.SansSerif,
                 )
                 when {
@@ -240,8 +259,9 @@ fun HomeScreen(
                 Text(
                     text = "Popular",
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
-                    fontWeight = FontWeight.W500,
-                    color = Color.Black,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 20.sp,
+                    color = Color.White,
                     fontFamily = FontFamily.SansSerif,
                 )
                 when {
@@ -258,7 +278,8 @@ fun HomeScreen(
                     text = "Upcoming",
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
                     fontWeight = FontWeight.W500,
-                    color = Color.Black,
+                    fontSize = 20.sp,
+                    color = Color.White,
                     fontFamily = FontFamily.SansSerif,
                 )
                 when {
@@ -270,10 +291,6 @@ fun HomeScreen(
                     }
                     else -> Log.e("AVM", "Something happened")
                 }
-
-
-
-
             }
         }
     }
@@ -285,7 +302,7 @@ fun AvmList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, imgUrl
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(20.dp)
 
 
     ) {
@@ -307,7 +324,7 @@ fun AvmList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, imgUrl
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(11, 175, 198).copy(alpha = 0.4f))
+                            .background(MaterialTheme.colors.buttonColor)
                             .padding(5.dp),
 
 //                        horizontalArrangement = Arrangement.Start
@@ -350,14 +367,14 @@ fun AvmList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, imgUrl
                                 modifier = Modifier
                                     .padding(4.dp)
                             )
-                            Text(
-                                text = item.Deskripsi,
-                                style = MaterialTheme.typography.body1,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(4.dp)
-                            )
+//                            Text(
+//                                text = item.Deskripsi,
+//                                style = MaterialTheme.typography.body1,
+//                                maxLines = 2,
+//                                overflow = TextOverflow.Ellipsis,
+//                                modifier = Modifier
+//                                    .padding(4.dp)
+//                            )
                         }
                     }
                 }
@@ -371,7 +388,7 @@ fun AvmTrendsList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(20.dp)
 
 
     ) {
@@ -393,7 +410,7 @@ fun AvmTrendsList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, 
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(11, 175, 198).copy(alpha = 0.4f))
+                            .background(MaterialTheme.colors.buttonColor)
                             .padding(5.dp),
 
 //                        horizontalArrangement = Arrangement.Start
@@ -436,14 +453,14 @@ fun AvmTrendsList(avl: List<AnimeModel>, itemClick: (index: Int, title: String, 
                                 modifier = Modifier
                                     .padding(4.dp)
                             )
-                            Text(
-                                text = item.Deskripsi,
-                                style = MaterialTheme.typography.body1,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(4.dp)
-                            )
+//                            Text(
+//                                text = item.Deskripsi,
+//                                style = MaterialTheme.typography.body1,
+//                                maxLines = 2,
+//                                overflow = TextOverflow.Ellipsis,
+//                                modifier = Modifier
+//                                    .padding(4.dp)
+//                            )
                         }
                     }
                 }
@@ -458,7 +475,7 @@ fun AvmUpcomingList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: St
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(20.dp)
 
 
     ) {
@@ -480,7 +497,7 @@ fun AvmUpcomingList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: St
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(11, 175, 198).copy(alpha = 0.4f))
+                            .background(MaterialTheme.colors.buttonColor)
                             .padding(5.dp),
 
 //                        horizontalArrangement = Arrangement.Start
@@ -523,14 +540,14 @@ fun AvmUpcomingList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: St
                                 modifier = Modifier
                                     .padding(4.dp)
                             )
-                            Text(
-                                text = item.Deskripsi,
-                                style = MaterialTheme.typography.body1,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(4.dp)
-                            )
+//                            Text(
+//                                text = item.Deskripsi,
+//                                style = MaterialTheme.typography.body1,
+//                                maxLines = 2,
+//                                overflow = TextOverflow.Ellipsis,
+//                                modifier = Modifier
+//                                    .padding(4.dp)
+//                            )
                         }
                     }
                 }
@@ -544,7 +561,7 @@ fun AvmPopularList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: Str
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(20.dp)
 
 
     ) {
@@ -566,7 +583,7 @@ fun AvmPopularList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: Str
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color(11, 175, 198).copy(alpha = 0.4f))
+                            .background(MaterialTheme.colors.buttonColor)
                             .padding(5.dp),
 
 //                        horizontalArrangement = Arrangement.Start
@@ -609,14 +626,14 @@ fun AvmPopularList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: Str
                                 modifier = Modifier
                                     .padding(4.dp)
                             )
-                            Text(
-                                text = item.Deskripsi,
-                                style = MaterialTheme.typography.body1,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(4.dp)
-                            )
+//                            Text(
+//                                text = item.Deskripsi,
+//                                style = MaterialTheme.typography.body1,
+//                                maxLines = 2,
+//                                overflow = TextOverflow.Ellipsis,
+//                                modifier = Modifier
+//                                    .padding(4.dp)
+//                            )
                         }
                     }
                 }
@@ -630,7 +647,7 @@ fun AvmHero(anime: AnimeBannerModel, itemClick: (index: Int, title: String, imgU
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(20.dp)
             .clickable {itemClick(anime.id, anime.title, anime.imgUrl, anime.genre, anime.Deskripsi, anime.rating, anime.release, anime.imgBanner) }
     ){
         Column {
@@ -652,23 +669,27 @@ fun AvmHero(anime: AnimeBannerModel, itemClick: (index: Int, title: String, imgU
                 .padding(4.dp)
                 .fillMaxWidth()
             ) {
-                Text(text = anime.title)
                 Text(
                     text = anime.title,
+                    color = Color.White,
+                    fontSize = 18.sp,
                     style = MaterialTheme.typography.subtitle1,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = anime.genre,
+                    color = Color.White,
+                    fontSize = 14.sp,
                     style = MaterialTheme.typography.caption,
                     modifier = Modifier
                         .background(
-                            Color.LightGray
+                            Color.Transparent
                         )
-                        .padding(4.dp)
                 )
                 Text(
                     text = anime.Deskripsi,
+                    color = Color.White,
+                    fontSize = 12.sp,
                     style = MaterialTheme.typography.body1,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis

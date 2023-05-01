@@ -7,5 +7,9 @@ sealed class Screens(val route: String) {
     object ChangePasswordScreen : Screens(route = "ChangePassword_Screen")
     object SearchScreen : Screens(route = "Search_Screen")
     object bottomNavGr : Screens(route = "Bottom_Nav")
+    object genreAction : Screens(route = "genre_Action")
+    object genreFantasy : Screens(route = "genre_Fantasy")
+    object genreSlice : Screens(route = "genre_Slice")
+    object genreComedy : Screens(route = "genre_Comedy")
 
 }

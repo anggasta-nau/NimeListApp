@@ -9,13 +9,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -24,9 +27,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import coil.size.Scale
+import com.pam.wibulist.R
 import com.pam.wibulist.models.AnimeBannerModel
 import com.pam.wibulist.models.AnimeFullModel
 import com.pam.wibulist.models.AnimeTrendingViewModel
+import com.pam.wibulist.ui.ButtonNavItem
+import com.pam.wibulist.ui.theme.backgroundColor
+import com.pam.wibulist.ui.theme.gener
 
 
 @Composable
@@ -40,39 +47,40 @@ fun MainScreenView(
             avm.getAnimeTrendingList()
         }
     )
-    Column {
-        Text(
-            text = "Top Anime",
-            fontSize = 24.sp,
-            fontWeight= FontWeight.SemiBold,
-            fontFamily = FontFamily.SansSerif,
-            modifier = Modifier.padding(start = 20.dp, top = 10.dp)
-        )
+    Column() {
+        Column(
+            modifier = Modifier
+                .background(MaterialTheme.colors.backgroundColor)
+        ) {
+            Text(
+                text = "Trend's Now",
+                fontSize = 24.sp,
+                color = Color.White,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily.SansSerif,
+                modifier = Modifier
+                    .padding(start = 20.dp, top = 20.dp)
+            )
 
-        when {
-            avm.errorMessage.isEmpty() -> {
-                AvmList(avl = avm.animeTrendingList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating, animeRelease ->
-                    Log.d("ClickItem", "this is anime id: $animeId")
-                    navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
+            when {
+                avm.errorMessage.isEmpty() -> {
+                    AvmList(avl = avm.animeTrendingList) { animeId, animeTitle, animeImgUrl, animeGenre, animeDeskripsi, animeRating, animeRelease ->
+                        Log.d("ClickItem", "this is anime id: $animeId")
+                        navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
+                    }
                 }
+                else -> Log.e("AVM", "Something happened")
             }
-            else -> Log.e("AVM", "Something happened")
         }
     }
 }
 @Composable
 fun AvmList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, imgUrl: String, genre: String, Deskripsi:String, rating:String, release:String)-> Unit) {
     Box(modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxSize()
         .padding(20.dp)
+        .fillMaxWidth()
+        .height(1750.dp)
     ) {
-        Text(
-            text = "Trending Now",
-            fontSize = 20.sp,
-            color = Color.White,
-            fontWeight = FontWeight.SemiBold
-        )
         Spacer(modifier = Modifier.height(10.dp))
         val scrollState = rememberScrollState()
 
@@ -82,7 +90,6 @@ fun AvmList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, 
             itemsIndexed(avl) { index, item ->
                 Box(
                     modifier = Modifier
-                        .padding(start = 20.dp, top = 20.dp)
                         .clickable {
                             itemClick(
                                 item.id,
@@ -92,8 +99,7 @@ fun AvmList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, 
                                 item.Deskripsi,
                                 item.rating,
                                 item.release,
-
-                                )
+                            )
                         }
                 ) {
                     Column {
@@ -105,38 +111,58 @@ fun AvmList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, 
                                     placeholder(coil.compose.base.R.drawable.notification_action_background)
                                 }
                             ),
-                            contentDescription = item.Deskripsi,
+                            contentDescription = null,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(16f/9f)
+                                .aspectRatio(16f / 9f)
+                                .clip(RoundedCornerShape(10))
                         )
-                        Column(modifier = Modifier.padding(4.dp)) {
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Column(modifier = Modifier) {
                             Text(
                                 text = item.title,
-                                style = MaterialTheme.typography.caption,
+                                color = Color.White,
+                                fontSize = 18.sp,
                             )
-
-                            Text(
-                                text = item.genre,
-                                style = MaterialTheme.typography.caption,
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Box(
                                 modifier = Modifier
-                                    .background(
-                                        Color.LightGray
-                                    )
-                                    .padding(4.dp)
-                            )
-                            Text(
-                                text = item.Deskripsi,
-                                style = MaterialTheme.typography.body1,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
-                            )
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(MaterialTheme.colors.gener),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = item.genre,
+                                    color = Color.White,
+                                    fontSize = 14.sp,
+                                    modifier = Modifier
+                                        .padding(5.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(MaterialTheme.colors.gener),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = item.Deskripsi,
+                                    color = Color.White,
+                                    fontSize = 12.sp,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier
+                                        .padding(5.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(5.dp))
+
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(30.dp))
             }
         }
-
     }
 }
 
