@@ -62,4 +62,5 @@
     <string name="log_out_success">Log Out Success</string>
     <string name="change_your">change your</string>
     <string name="account">account</string>
+    <string name="genres">Genre</string>
 </resources>

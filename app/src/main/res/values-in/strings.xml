@@ -63,4 +63,5 @@
     <string name="log_out_success">Keluar Berhasil</string>
     <string name="change_your">Ubah</string>
     <string name="account">Akun</string>
+    <string name="genres">Genre</string>
 </resources>
