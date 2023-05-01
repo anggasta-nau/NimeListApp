@@ -53,15 +53,15 @@ fun LoginScreen(
 
         ) {
         Column() {
-            Column(verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(
-                    painter = painterResource(id = R.drawable.group_27_removebg_preview),
-                    contentDescription = null,
-                    modifier = Modifier.padding(top = 40.dp, start = 20.dp, end = 20.dp),
-                    alignment = Alignment.TopEnd,
-                )
-            }
+            Image(
+                painter = painterResource(id = R.drawable.group_27_removebg_preview),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                    .align(Alignment.End)
+                    .width(150.dp)
+                    .height(100.dp)
+            )
             Text(
                 text = stringResource(R.string.welcome),
                 fontSize = 32.sp,
@@ -91,11 +91,11 @@ fun LoginScreen(
                 //TextField
                 OutlinedTextField(
                     value = emailInput.toString(),
-                    onValueChange = {emailInput = it},
-                    label = { Text(text = stringResource(R.string.Email))},
+                    onValueChange = { emailInput = it },
+                    label = { Text(text = stringResource(R.string.Email)) },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
-                        unfocusedBorderColor = Color.LightGray,
+                        unfocusedBorderColor = Color.Black.copy(0.7f),
                         focusedLabelColor = MaterialTheme.colors.buttonColor
                     ),
                     shape = RoundedCornerShape(20.dp),
@@ -106,11 +106,11 @@ fun LoginScreen(
                 )
                 OutlinedTextField(
                     value = passwordInput.toString(),
-                    onValueChange = {passwordInput = it},
-                    label = { Text(text = stringResource(R.string.Password))},
+                    onValueChange = { passwordInput = it },
+                    label = { Text(text = stringResource(R.string.Password)) },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
-                        unfocusedBorderColor = Color.LightGray,
+                        unfocusedBorderColor = Color.Black.copy(0.7f),
                         focusedLabelColor = MaterialTheme.colors.buttonColor
                     ),
                     shape = RoundedCornerShape(20.dp),
@@ -120,45 +120,26 @@ fun LoginScreen(
                         .fillMaxWidth()
                         .padding(top = 20.dp)
                 )
-
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.padding(top = 10.dp)
+                Spacer(modifier = Modifier.height(10.dp))
+                TextButton(
+                    onClick = {
+                        navController.navigate(route = Screens.ChangePasswordScreen.route)
+                    },
+                    modifier = Modifier.align(Alignment.End)
                 ) {
-                    TextButton(
-                        onClick = {
-                            navController.navigate(route = Screens.SignUpScreen.route)
-                        }
-                    ) {
-                        Text(
-                            text = stringResource(R.string.dnthvacc),
-                            fontWeight = FontWeight.Thin,
-                            color = Color.Black,
-                            fontSize = 12.sp
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(1f))
-                    TextButton(
-                        onClick = {
-                            navController.navigate(route = Screens.ChangePasswordScreen.route)
-                        }
-                    ) {
-                        Text(
-                            text = stringResource(R.string.forgot_password),
-                            fontWeight = FontWeight.Thin,
-                            color = Color.Black,
-                            fontSize = 12.sp
-                        )
-                    }
+                    Text(
+                        text = stringResource(R.string.forgot_password),
+                        fontWeight = FontWeight.Thin,
+                        color = Color.Black,
+                        fontSize = 12.sp
+                    )
                 }
-
-
 
                 //Button Login
                 Button(
                     onClick = {
                         scope.launch {
-                            viewModel.loginUser(emailInput,passwordInput)
+                            viewModel.loginUser(emailInput, passwordInput)
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -177,14 +158,28 @@ fun LoginScreen(
                         color = Color.White
                     )
                 }
+
+                Spacer(modifier = Modifier.height(15.dp))
+                TextButton(
+                    onClick = {
+                        navController.navigate(route = Screens.SignUpScreen.route)
+                    },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(
+                        text = stringResource(R.string.dnthvacc),
+                        fontWeight = FontWeight.Thin,
+                        color = Color.Black,
+                        fontSize = 12.sp
+                    )
+                }
                 //LOADING
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    if (state.value?.isloading == true)
-                    {
+                    if (state.value?.isloading == true) {
                         CircularProgressIndicator()
                     }
                 }
@@ -192,8 +187,7 @@ fun LoginScreen(
                 LaunchedEffect(key1 = state.value?.isSuccess)
                 {
                     scope.launch {
-                        if (state.value?.isSuccess?.isNotEmpty()==true)
-                        {
+                        if (state.value?.isSuccess?.isNotEmpty() == true) {
                             val success = state.value?.isSuccess
                             val loginData = loginData(email = emailInput)
                             sharedViewModel.addPerson(loginData)
@@ -207,8 +201,7 @@ fun LoginScreen(
                 LaunchedEffect(key1 = state.value?.isError)
                 {
                     scope.launch {
-                        if (state.value?.isError?.isNotEmpty()==true)
-                        {
+                        if (state.value?.isError?.isNotEmpty() == true) {
                             val error = state.value?.isError
                             Toast.makeText(context, "${error}", Toast.LENGTH_LONG).show()
                         }
@@ -217,5 +210,4 @@ fun LoginScreen(
             }
         }
     }
-
 }
