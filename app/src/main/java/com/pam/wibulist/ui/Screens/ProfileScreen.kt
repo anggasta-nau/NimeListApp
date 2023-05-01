@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -117,7 +118,7 @@ fun ProfileScreen(
                 onClick = { takePictureContract.launch() }
             ) {
                 Text(
-                    text = "Edit Profile",
+                    text = stringResource(R.string.edit_profile),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
                     color = Color.White,
@@ -127,7 +128,7 @@ fun ProfileScreen(
             //Text
             Spacer(modifier = Modifier.height(15.dp))
             Text(
-                text = "Username",
+                text = stringResource(R.string.username),
                 color = Color.White,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -153,7 +154,7 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(15.dp))
             Text(
                 //Tampilkan nama bolh
-                text = "Email",
+                text = stringResource(R.string.Email),
                 color = Color.White,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -190,7 +191,7 @@ fun ProfileScreen(
                     )
                 ) {
                     Text(
-                        text = "Log Out",
+                        text = stringResource(R.string.log_out),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,
@@ -209,7 +210,7 @@ fun ProfileScreen(
                     modifier = Modifier.padding(start = 130.dp)
                 ) {
                     Text(
-                        text = "Save Profile",
+                        text = stringResource(R.string.save_profile),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,

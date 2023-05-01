@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -70,7 +71,7 @@ fun ChangePasswordScreen(
                     modifier = Modifier.padding(top = 40.dp, start = 20.dp, end = 20.dp)
                 )
                 Text(
-                    text = "Welcome",
+                    text = stringResource(R.string.welcome),
                     fontSize = 32.sp,
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
@@ -78,7 +79,7 @@ fun ChangePasswordScreen(
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)
                 )
                 Text(
-                    text = "Back",
+                    text = stringResource(R.string.back),
                     fontSize = 32.sp,
                     color = MaterialTheme.colors.buttonColor,
                     fontWeight = FontWeight.SemiBold,
@@ -104,7 +105,7 @@ fun ChangePasswordScreen(
                     OutlinedTextField(
                         value = email.toString(),
                         onValueChange = { email = it },
-                        label = { Text(text = "Email") },
+                        label = { Text(text = stringResource(R.string.Email)) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = MaterialTheme.colors.buttonColor,
                             unfocusedBorderColor = Color.LightGray,
@@ -119,7 +120,7 @@ fun ChangePasswordScreen(
                     OutlinedTextField(
                         value = password.toString(),
                         onValueChange = { password = it },
-                        label = { Text(text = "Password") },
+                        label = { Text(text = stringResource(R.string.Password)) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = MaterialTheme.colors.buttonColor,
                             unfocusedBorderColor = Color.LightGray,
@@ -135,7 +136,7 @@ fun ChangePasswordScreen(
                     OutlinedTextField(
                         value = confirmPassword.toString(),
                         onValueChange = { confirmPassword = it },
-                        label = { Text(text = "Confirm Password") },
+                        label = { Text(text = stringResource(R.string.CPaswoord)) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = MaterialTheme.colors.buttonColor,
                             unfocusedBorderColor = Color.LightGray,
@@ -180,7 +181,7 @@ fun ChangePasswordScreen(
                         shape = CutCornerShape(10)
                     ) {
                         Text(
-                            text = "Submit",
+                            text = stringResource(R.string.submit),
                             fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color.White
@@ -195,7 +196,7 @@ fun ChangePasswordScreen(
                         modifier = Modifier.align(Alignment.End)
                     ) {
                         Text(
-                            text = "Already have account? Sign in",
+                            text = stringResource(R.string.alrdyhvacc),
                             fontWeight = FontWeight.Thin,
                             color = Color.Black,
                             fontSize = 16.sp

@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -91,7 +92,7 @@ fun HomeScreen(
                 .background(MaterialTheme.colors.backgroundColor)
         ){
             Text(
-                text = "NiList",
+                text = stringResource(R.string.app_name),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.White,
@@ -111,13 +112,13 @@ fun HomeScreen(
                     Log.d("hero-item", "$anime")
                 }
                 else -> {
-                    Text(text = "No data available")
+                    Text(text = stringResource(R.string.no_data_available))
                 }
             }
 
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Genre's",
+                text = stringResource(R.string.genre),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.White,
@@ -142,7 +143,7 @@ fun HomeScreen(
                             }
                         ) {
                             Text(
-                                text = "Action",
+                                text = stringResource(R.string.action),
                                 color = Color.White,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
@@ -164,7 +165,7 @@ fun HomeScreen(
                             onClick = { navController.navigate(route = Screens.genreFantasy.route) }
                         ) {
                             Text(
-                                text = "Fantasy",
+                                text = stringResource(R.string.fantasy),
                                 color = Color.White,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
@@ -186,7 +187,7 @@ fun HomeScreen(
                             onClick = { navController.navigate(route = Screens.genreComedy.route) }
                         ) {
                             Text(
-                                text = "Comedy",
+                                text = stringResource(R.string.comedy),
                                 color = Color.White,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
@@ -208,7 +209,7 @@ fun HomeScreen(
                             onClick = { navController.navigate(route = Screens.genreSlice.route) }
                         ) {
                             Text(
-                                text = "Slice of Life",
+                                text = stringResource(R.string.slice_of_life),
                                 color = Color.White,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
@@ -221,7 +222,7 @@ fun HomeScreen(
             Column() {
 
                 Text(
-                    text = "For You",
+                    text = stringResource(R.string.for_you),
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
@@ -235,11 +236,11 @@ fun HomeScreen(
                             navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi")
                         }
                     }
-                    else -> Log.e("AVM", "Something happened")
+                    else -> Log.e("AVM", stringResource(R.string.something_happened))
                 }
 
                 Text(
-                    text = "Trend",
+                    text = stringResource(R.string.trend),
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
@@ -253,11 +254,11 @@ fun HomeScreen(
                             navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi")
                         }
                     }
-                    else -> Log.e("AVM", "Something happened")
+                    else -> Log.e("AVM", stringResource(R.string.something_happened))
                 }
 
                 Text(
-                    text = "Popular",
+                    text = stringResource(R.string.popular),
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
@@ -271,11 +272,11 @@ fun HomeScreen(
                             navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
                         }
                     }
-                    else -> Log.e("AVM", "Something happened")
+                    else -> Log.e("AVM", stringResource(R.string.something_happened))
                 }
 
                 Text(
-                    text = "Upcoming",
+                    text = stringResource(R.string.upcoming),
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, bottom = 10.dp),
                     fontWeight = FontWeight.W500,
                     fontSize = 20.sp,
@@ -289,7 +290,7 @@ fun HomeScreen(
                             navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
                         }
                     }
-                    else -> Log.e("AVM", "Something happened")
+                    else -> Log.e("AVM", stringResource(R.string.something_happened))
                 }
             }
         }
@@ -491,7 +492,15 @@ fun AvmUpcomingList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: St
                         .height(150.dp)
                         .padding(5.dp)
                         .clickable {
-                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating, item.release)
+                            itemClick(
+                                item.id,
+                                item.title,
+                                item.imgUrl,
+                                item.genre,
+                                item.Deskripsi,
+                                item.rating,
+                                item.release
+                            )
                         },
                 ) {
                     Row(
@@ -577,7 +586,15 @@ fun AvmPopularList(avl: List<AnimeFullModel>, itemClick: (index: Int, title: Str
                         .height(150.dp)
                         .padding(5.dp)
                         .clickable {
-                            itemClick(item.id, item.title, item.imgUrl, item.genre, item.Deskripsi, item.rating, item.release)
+                            itemClick(
+                                item.id,
+                                item.title,
+                                item.imgUrl,
+                                item.genre,
+                                item.Deskripsi,
+                                item.rating,
+                                item.release
+                            )
                         },
                 ) {
                     Row(
@@ -648,7 +665,18 @@ fun AvmHero(anime: AnimeBannerModel, itemClick: (index: Int, title: String, imgU
         modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp)
-            .clickable {itemClick(anime.id, anime.title, anime.imgUrl, anime.genre, anime.Deskripsi, anime.rating, anime.release, anime.imgBanner) }
+            .clickable {
+                itemClick(
+                    anime.id,
+                    anime.title,
+                    anime.imgUrl,
+                    anime.genre,
+                    anime.Deskripsi,
+                    anime.rating,
+                    anime.release,
+                    anime.imgBanner
+                )
+            }
     ){
         Column {
             Image(
@@ -663,7 +691,7 @@ fun AvmHero(anime: AnimeBannerModel, itemClick: (index: Int, title: String, imgU
                 contentDescription = anime.Deskripsi,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(16f/9f)
+                    .aspectRatio(16f / 9f)
             )
             Column(modifier = Modifier
                 .padding(4.dp)

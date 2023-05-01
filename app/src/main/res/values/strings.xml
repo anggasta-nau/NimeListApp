@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WibuList</string>
+    <string name="app_name">NimeList</string>
     <string name="LName">Last Name</string>
     <string name="FName">First Name</string>
     <string name="Password">Password</string>
@@ -29,4 +29,30 @@
     <string name="recopmen">Recomendation</string>
     <string name="kategori">Genres: Action</string>
     <string name="pplalssrch">People Also Search</string>
+    <string name="genre_s_action">Genre\'s Action</string>
+    <string name="something_happened">Something happened</string>
+    <string name="season">Season</string>
+    <string name="total_episode">Total Episode</string>
+    <string name="status">Status</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="back">Back</string>
+    <string name="submit">Submit</string>
+    <string name="genre_s_comedy">Genre\'s Comedy</string>
+    <string name="rating">Rating</string>
+    <string name="genre_s_fantasy">Genre\'s Fantasy</string>
+    <string name="no_data_available">No data available</string>
+    <string name="action">Action</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="comedy">Comedy</string>
+    <string name="slice_of_life">Slice of Life</string>
+    <string name="for_you">For You</string>
+    <string name="popular">Popular</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="username">Username</string>
+    <string name="log_out">Log Out</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="trend_s_now">Trend\'s Now</string>
+    <string name="rate_4_5">Rate 4/5</string>
 </resources>

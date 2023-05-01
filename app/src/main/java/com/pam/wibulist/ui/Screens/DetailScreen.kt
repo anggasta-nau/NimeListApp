@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -88,7 +89,7 @@ fun DetailScreen(
             Column() {
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "Genre",
+                    text = stringResource(R.string.genre),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White,
@@ -102,7 +103,7 @@ fun DetailScreen(
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "Rating",
+                    text = stringResource(R.string.rating),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White,
@@ -116,7 +117,7 @@ fun DetailScreen(
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "Release",
+                    text = stringResource(R.string.release),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White,
@@ -130,7 +131,7 @@ fun DetailScreen(
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "Sypnosys",
+                    text = stringResource(R.string.synopsis),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White,

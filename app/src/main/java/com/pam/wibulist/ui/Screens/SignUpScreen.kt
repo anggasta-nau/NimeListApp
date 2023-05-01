@@ -68,7 +68,7 @@ fun SignUpScreen (
                 modifier = Modifier.padding(top = 40.dp, start = 20.dp, end = 20.dp)
             )
             Text(
-                text = "Welcome",
+                text = stringResource(R.string.welcome),
                 fontSize = 32.sp,
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold,
@@ -76,7 +76,7 @@ fun SignUpScreen (
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)
             )
             Text(
-                text = "Back",
+                text = stringResource(R.string.back),
                 fontSize = 32.sp,
                 color = MaterialTheme.colors.buttonColor,
                 fontWeight = FontWeight.SemiBold,
@@ -96,7 +96,7 @@ fun SignUpScreen (
                 OutlinedTextField(
                     value = Username.toString(),
                     onValueChange = {Username = it},
-                    label = { Text(text = "Username")},
+                    label = { Text(text = stringResource(R.string.username))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
                         unfocusedBorderColor = Color.LightGray,
@@ -111,7 +111,7 @@ fun SignUpScreen (
                 OutlinedTextField(
                     value = emailInput.toString(),
                     onValueChange = {emailInput = it},
-                    label = { Text(text = "Email")},
+                    label = { Text(text = stringResource(R.string.Email))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
                         unfocusedBorderColor = Color.LightGray,
@@ -126,7 +126,7 @@ fun SignUpScreen (
                 OutlinedTextField(
                     value = passwordInput.toString(),
                     onValueChange = {passwordInput = it},
-                    label = { Text(text = "Password")},
+                    label = { Text(text = stringResource(R.string.Password))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
                         unfocusedBorderColor = Color.LightGray,
@@ -142,7 +142,7 @@ fun SignUpScreen (
                 OutlinedTextField(
                     value = confirmPassword.toString(),
                     onValueChange = {confirmPassword = it},
-                    label = { Text(text = "Password")},
+                    label = { Text(text = stringResource(R.string.CPaswoord))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
                         unfocusedBorderColor = Color.LightGray,
@@ -180,7 +180,7 @@ fun SignUpScreen (
                     shape = CutCornerShape(10)
                 ) {
                     Text(
-                        text = "Login",
+                        text = stringResource(R.string.Login),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White

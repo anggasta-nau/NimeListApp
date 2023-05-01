@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -76,7 +77,7 @@ fun ComedyScreenView(
                     )
                 }
                 Text(
-                    text = "Genre's Comedy",
+                    text = stringResource(R.string.genre_s_comedy),
                     fontSize = 24.sp,
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
@@ -93,7 +94,7 @@ fun ComedyScreenView(
                         navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
                     }
                 }
-                else -> Log.e("AVM", "Something happened")
+                else -> Log.e("AVM", stringResource(R.string.something_happened))
             }
         }
     }

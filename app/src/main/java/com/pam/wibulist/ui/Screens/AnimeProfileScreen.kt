@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.pam.wibulist.R
 import com.pam.wibulist.data.AnimeDetail
 
 @Composable
@@ -63,10 +65,10 @@ private fun AnimeContent(anime: AnimeDetail, containerHeight: Dp)
 {
     Column() {
         AnimeTitle(anime = anime)
-        AnimeProfileProperty(label = "Season" , value = anime.Season)
-        AnimeProfileProperty(label = "Total Episode", value = anime.totalEpisode)
-        AnimeProfileProperty(label = "Status", value = anime.Status)
-        AnimeProfileProperty(label = "Synopsis", value = anime.AnimeDesc)
+        AnimeProfileProperty(label = stringResource(R.string.season) , value = anime.Season)
+        AnimeProfileProperty(label = stringResource(R.string.total_episode), value = anime.totalEpisode)
+        AnimeProfileProperty(label = stringResource(R.string.status), value = anime.Status)
+        AnimeProfileProperty(label = stringResource(R.string.synopsis), value = anime.AnimeDesc)
         AnimeSynopsis(anime = anime)
     }
 }

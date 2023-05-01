@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -62,7 +63,7 @@ fun LoginScreen(
                 )
             }
             Text(
-                text = "Welcome",
+                text = stringResource(R.string.welcome),
                 fontSize = 32.sp,
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold,
@@ -70,7 +71,7 @@ fun LoginScreen(
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)
             )
             Text(
-                text = "Back",
+                text = stringResource(R.string.back),
                 fontSize = 32.sp,
                 color = MaterialTheme.colors.buttonColor,
                 fontWeight = FontWeight.SemiBold,
@@ -91,7 +92,7 @@ fun LoginScreen(
                 OutlinedTextField(
                     value = emailInput.toString(),
                     onValueChange = {emailInput = it},
-                    label = { Text(text = "Email")},
+                    label = { Text(text = stringResource(R.string.Email))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
                         unfocusedBorderColor = Color.LightGray,
@@ -106,7 +107,7 @@ fun LoginScreen(
                 OutlinedTextField(
                     value = passwordInput.toString(),
                     onValueChange = {passwordInput = it},
-                    label = { Text(text = "Password")},
+                    label = { Text(text = stringResource(R.string.Password))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
                         unfocusedBorderColor = Color.LightGray,
@@ -130,7 +131,7 @@ fun LoginScreen(
                         }
                     ) {
                         Text(
-                            text = "Don't have an Account?",
+                            text = stringResource(R.string.dnthvacc),
                             fontWeight = FontWeight.Thin,
                             color = Color.Black,
                             fontSize = 12.sp
@@ -143,7 +144,7 @@ fun LoginScreen(
                         }
                     ) {
                         Text(
-                            text = "Forgot Password?",
+                            text = stringResource(R.string.forgot_password),
                             fontWeight = FontWeight.Thin,
                             color = Color.Black,
                             fontSize = 12.sp
@@ -170,7 +171,7 @@ fun LoginScreen(
                     shape = CutCornerShape(10)
                 ) {
                     Text(
-                        text = "Login",
+                        text = stringResource(R.string.Login),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White

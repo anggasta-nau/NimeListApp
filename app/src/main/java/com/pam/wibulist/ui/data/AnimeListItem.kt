@@ -15,7 +15,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.pam.wibulist.R
 
 @Composable
 fun AnimeListItem(anime: AnimeDetail, navigateToProfile: (AnimeDetail) -> Unit) {
@@ -46,7 +48,7 @@ fun AnimeListItem(anime: AnimeDetail, navigateToProfile: (AnimeDetail) -> Unit) 
                             .fillMaxWidth(),
                         style = MaterialTheme.typography.h6
                     )
-                    Text(text = "Rate 4/5", style = MaterialTheme.typography.caption)
+                    Text(text = stringResource(R.string.rate_4_5), style = MaterialTheme.typography.caption)
                 }
             }
         }

@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import coil.size.Scale
+import com.pam.wibulist.R
 import com.pam.wibulist.models.*
 import com.pam.wibulist.ui.theme.backgroundColor
 import com.pam.wibulist.ui.theme.buttonColor
@@ -59,7 +61,7 @@ fun MainScreenView(
         OutlinedTextField(
             value = search,
             onValueChange = { search = it },
-            label = { Text(text = "Search", color = Color.White) },
+            label = { Text(text = stringResource(R.string.search), color = Color.White) },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = MaterialTheme.colors.buttonColor,
                 unfocusedBorderColor = Color.LightGray,
@@ -70,7 +72,7 @@ fun MainScreenView(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = "Search",
+                    contentDescription = stringResource(R.string.search),
                     tint = Color.White // Mengubah warna ikon
                 )
             },
@@ -94,7 +96,7 @@ fun MainScreenView(
                 navController.navigate("Detail?id=$animeId?title=$animeTitle?imgUrl=$animeImgUrl?genre=$animeGenre?Deskripsi=$animeDeskripsi?rating=$animeRating?release=$animeRelease")
             }
         } else {
-            Log.e("AVM", "Something happened")
+            Log.e("AVM", stringResource(R.string.something_happened))
         }
     }
 }
