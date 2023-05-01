@@ -47,8 +47,6 @@ fun ChangePasswordScreen(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val setUserInformation = sharedViewModel.person
-
-
     val user = Firebase.auth.currentUser!!
 
 //    if (user != null) {
@@ -207,4 +205,5 @@ fun ChangePasswordScreen(
             }
 
         }
-    }
+//    }
+}
