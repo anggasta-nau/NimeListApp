@@ -135,7 +135,7 @@ fun ProfileScreen(
             )
             Spacer(modifier = Modifier.height(5.dp))
             TextField(
-                value = name,
+                value = usernameInput.toString() ,
                 onValueChange ={usernameInput = it},
                 label = {
                     Text(
@@ -161,7 +161,7 @@ fun ProfileScreen(
             )
             Spacer(modifier = Modifier.height(5.dp))
             TextField(
-                value = usernameInput.toString(),
+                value = emailInput.toString(),
                 onValueChange ={usernameInput = it},
                 enabled = false,
                 label = {
