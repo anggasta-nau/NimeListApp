@@ -55,6 +55,12 @@
     <string name="save_profile">Save Profile</string>
     <string name="trend_s_now">Trend\'s Now</string>
     <string name="rate_4_5">Rate 4/5</string>
+
+    <string name="change">Change Your</string>
+    <string name="psword">Password</string>
+    <string name="create">Create Your</string>
+    <string name="accnt">Account</string>
+
     <string name="profile_saved">Profile Saved</string>
     <string name="failed_to_add_data">failed to add data</string>
     <string name="password_has_been_change_please_login_again">Password has been change, please Login again!!</string>
@@ -63,4 +69,5 @@
     <string name="change_your">change your</string>
     <string name="account">account</string>
     <string name="genres">Genre</string>
+
 </resources>
