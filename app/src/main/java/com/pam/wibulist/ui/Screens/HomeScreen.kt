@@ -86,7 +86,7 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .verticalScroll((rememberScrollState()))
-            .height(1550.dp)) {
+            .height(1510.dp)) {
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colors.backgroundColor)

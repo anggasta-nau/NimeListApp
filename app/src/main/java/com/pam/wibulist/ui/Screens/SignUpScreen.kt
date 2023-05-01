@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -65,7 +66,11 @@ fun SignUpScreen (
             Image(
                 painter = painterResource(id = R.drawable.group_27_removebg_preview),
                 contentDescription = null,
-                modifier = Modifier.padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                modifier = Modifier
+                    .padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                    .align(Alignment.End)
+                    .width(150.dp)
+                    .height(100.dp)
             )
             Text(
                 text = stringResource(R.string.welcome),
@@ -99,7 +104,7 @@ fun SignUpScreen (
                     label = { Text(text = stringResource(R.string.username))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
-                        unfocusedBorderColor = Color.LightGray,
+                        unfocusedBorderColor = Color.Black.copy(0.7f),
                         focusedLabelColor = MaterialTheme.colors.buttonColor
                     ),
                     shape = RoundedCornerShape(20.dp),
@@ -114,7 +119,7 @@ fun SignUpScreen (
                     label = { Text(text = stringResource(R.string.Email))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
-                        unfocusedBorderColor = Color.LightGray,
+                        unfocusedBorderColor = Color.Black.copy(0.7f),
                         focusedLabelColor = MaterialTheme.colors.buttonColor
                     ),
                     shape = RoundedCornerShape(20.dp),
@@ -129,7 +134,7 @@ fun SignUpScreen (
                     label = { Text(text = stringResource(R.string.Password))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
-                        unfocusedBorderColor = Color.LightGray,
+                        unfocusedBorderColor = Color.Black.copy(0.7f),
                         focusedLabelColor = MaterialTheme.colors.buttonColor
                     ),
                     shape = RoundedCornerShape(20.dp),
@@ -145,7 +150,7 @@ fun SignUpScreen (
                     label = { Text(text = stringResource(R.string.CPaswoord))},
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = MaterialTheme.colors.buttonColor,
-                        unfocusedBorderColor = Color.LightGray,
+                        unfocusedBorderColor = Color.Black.copy(0.7f),
                         focusedLabelColor = MaterialTheme.colors.buttonColor
                     ),
                     shape = RoundedCornerShape(20.dp),
@@ -184,6 +189,21 @@ fun SignUpScreen (
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White
+                    )
+                }
+                Spacer(modifier = Modifier.height(10.dp))
+                TextButton(
+                    onClick = {
+                        //getEmailFromSignUpForm.launch("")
+                        navController.navigate(route = Screens.LoginScreen.route)
+                    },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(
+                        text = stringResource(R.string.alrdyhvacc),
+                        fontWeight = FontWeight.Thin,
+                        color = Color.Black,
+                        fontSize = 14.sp
                     )
                 }
 
