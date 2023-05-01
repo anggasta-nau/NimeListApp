@@ -84,7 +84,7 @@ fun DetailScreen2(
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Column() {
+            Column(modifier = Modifier.padding(start = 30.dp, end = 30.dp)) {
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
                     text = stringResource(R.string.genres),

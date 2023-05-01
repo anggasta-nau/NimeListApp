@@ -40,13 +40,13 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.pam.wibulist.MainActivity
 import com.pam.wibulist.NavigationGraph.Screens
@@ -80,26 +80,43 @@ fun ProfileScreen(
     )
 
     var name by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
     val scope = rememberCoroutineScope()
     val setUserInformation = sharedViewModel.person
-    val user = FirebaseAuth.getInstance()
+    val user1 = FirebaseAuth.getInstance()
     var emailInput by remember { mutableStateOf("") }
     var usernameInput by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
 
     sharedViewModel.retrieveData(
         email = setUserInformation!!.email,
         context = context
     ) { data ->
         name = data.name
-        emailInput = data.email
+        email = data.email
     }
 
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(MaterialTheme.colors.backgroundColor),
+    Column(
+        modifier = Modifier
+            .height(1950.dp)
+            .verticalScroll(rememberScrollState())
+            .background(MaterialTheme.colors.backgroundColor),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.log_out),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(top = 20.dp, start = 20.dp, end = 20.dp)
+                .align(Alignment.End)
+                .clickable {
+                    user1.signOut()
+                    context.startActivity(Intent(context, MainActivity::class.java))
+                }
+
+        )
 //            Text(
 //                text = "Profile",
 //                fontSize = 20.sp,
@@ -107,25 +124,27 @@ fun ProfileScreen(
 //                color = Color.White,
 //                modifier = Modifier.padding(top = 20.dp)
 //            )
-            Spacer(modifier = Modifier.height(20.dp))
-             Image(
-                 bitmap = takenImage,
-                 contentDescription = null,
-                 modifier = Modifier
-                    .clip(CircleShape)
-             )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextButton(
-                onClick = { takePictureContract.launch() }
-            ) {
-                Text(
-                    text = stringResource(R.string.edit_profile),
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp,
-                    color = Color.White,
-                )
-            }
-        Column(modifier = Modifier.padding(15.dp)) {
+        Spacer(modifier = Modifier.height(20.dp))
+        Image(
+            bitmap = takenImage,
+            contentDescription = null,
+            modifier = Modifier
+                .clip(CircleShape)
+                .width(150.dp)
+                .height(150.dp)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        TextButton(
+            onClick = { takePictureContract.launch() }
+        ) {
+            Text(
+                text = stringResource(R.string.edit_profile),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 16.sp,
+                color = Color.White,
+            )
+        }
+        Column(modifier = Modifier.padding(20.dp)) {
             //Text
             Spacer(modifier = Modifier.height(15.dp))
             Text(
@@ -143,9 +162,9 @@ fun ProfileScreen(
                 label = {
                     Text(
                         text = name,
-                        fontSize = 18.sp,
+                        fontSize = 16.sp,
                         color = Color.White,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Thin,
                     )
                 },
 
@@ -155,7 +174,7 @@ fun ProfileScreen(
             )
             Spacer(modifier = Modifier.height(15.dp))
             Text(
-                //Tampilkan nama boleh
+                //Tampilkan nama bolh
                 text = stringResource(R.string.Email),
                 color = Color.White,
                 fontSize = 18.sp,
@@ -164,28 +183,103 @@ fun ProfileScreen(
             )
             Spacer(modifier = Modifier.height(5.dp))
             TextField(
-                value = emailInput.toString(),
-                onValueChange ={usernameInput = it},
+                value = emailInput.toString() ,
+                onValueChange ={emailInput = it},
                 enabled = false,
                 label = {
                     Text(
-                        //Tampilkan email
-                        text = emailInput,
-                        fontSize = 18.sp,
+                        text = email,
+                        fontSize = 16.sp,
                         color = Color.White,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Thin,
                     )
                 },
+
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                textStyle = TextStyle(color = Color.White)
             )
             Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                //password
+                text = "Password",
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily.SansSerif
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            TextField(
+                value = password,
+                onValueChange ={password = it},
+                label = {
+                    Text(
+                        //Tampilkan Password
+                        text = "Password",
+                        fontSize = 16.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Thin
+                    )
+                },
+                visualTransformation = PasswordVisualTransformation(),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textStyle = TextStyle(color = Color.White)
+            )
+
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                //password
+                text = "Confirm Password",
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily.SansSerif
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            TextField(
+                value = confirmPassword,
+                onValueChange ={confirmPassword = it},
+                label = {
+                    Text(
+                        //Tampilkan Password
+                        text = "Confirm Password",
+                        fontSize = 16.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Thin
+                    )
+                },
+                visualTransformation = PasswordVisualTransformation(),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textStyle = TextStyle(color = Color.White)
+            )
+
+            Spacer(modifier = Modifier.height(15.dp))
+
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
+
                 Button(
                     onClick = {
-                        user.signOut()
-                        context.startActivity(Intent(context, MainActivity::class.java))
-                        Toast.makeText(context, context.getString(R.string.log_out_success), Toast.LENGTH_LONG).show()
+                        if(password.equals(confirmPassword))
+                        {
+                            if (password.length < 6)
+                            {
+                                Toast.makeText(context, "Make sure your password lenght more than 6", Toast.LENGTH_LONG).show()
+                            }
+                            else
+                            {
+                                val user = Firebase.auth.currentUser!!
+                                user.updatePassword(password)
+                                user1.signOut()
+                                context.startActivity(Intent(context, MainActivity::class.java))
+                                Toast.makeText(context, "Password has been changed, please Login again!", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Make sure your password and confirm password match", Toast.LENGTH_LONG).show()
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color(51, 133, 255,),
@@ -193,23 +287,25 @@ fun ProfileScreen(
                     )
                 ) {
                     Text(
-                        text = stringResource(R.string.log_out),
+                        text = "Save Password",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,
                         fontFamily = FontFamily.SansSerif
                     )
                 }
+
                 Button(
                     onClick = {
                         onSubmitActionEvent(takenImage, context, emailInput)
                         takenImage = BitmapFactory.decodeResource(context.resources, R.drawable.no_image_available_svg).asImageBitmap()
+
                     },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color(51, 133, 255,),
                         contentColor = Color.White
                     ),
-                    modifier = Modifier.padding(start = 130.dp)
+                    modifier = Modifier.padding(start = 80.dp)
                 ) {
                     Text(
                         text = stringResource(R.string.save_profile),
@@ -220,7 +316,9 @@ fun ProfileScreen(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(50.dp))
         }
+        Spacer(modifier = Modifier.height(50.dp))
     }
 
 }
