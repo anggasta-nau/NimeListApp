@@ -61,4 +61,6 @@
     <string name="password_has_been_change_please_login_again">Kata sandi telah diubah, silakan Masuk kembali!!</string>
     <string name="make_sure_your_password_and_your_confirm_password_match">Pastikan Kata Sandi Anda dan Konfirmasi Kata Sandi Anda cocok</string>
     <string name="log_out_success">Keluar Berhasil</string>
+    <string name="change_your">Ubah</string>
+    <string name="account">Akun</string>
 </resources>

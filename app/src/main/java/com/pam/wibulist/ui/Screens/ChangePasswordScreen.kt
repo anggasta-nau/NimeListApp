@@ -77,7 +77,7 @@ fun ChangePasswordScreen(
                         .height(100.dp)
                 )
                 Text(
-                    text = stringResource(R.string.welcome),
+                    text = stringResource(R.string.change_your),
                     fontSize = 32.sp,
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
@@ -85,7 +85,7 @@ fun ChangePasswordScreen(
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)
                 )
                 Text(
-                    text = stringResource(R.string.back),
+                    text = stringResource(R.string.Password),
                     fontSize = 32.sp,
                     color = MaterialTheme.colors.buttonColor,
                     fontWeight = FontWeight.SemiBold,
