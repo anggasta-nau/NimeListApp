@@ -125,7 +125,7 @@ fun ProfileScreen(
                     color = Color.White,
                 )
             }
-        Column(modifier = Modifier.padding(20.dp)) {
+        Column(modifier = Modifier.padding(15.dp)) {
             //Text
             Spacer(modifier = Modifier.height(15.dp))
             Text(
@@ -139,12 +139,13 @@ fun ProfileScreen(
             TextField(
                 value = usernameInput.toString() ,
                 onValueChange ={usernameInput = it},
+                enabled = false,
                 label = {
                     Text(
                         text = name,
-                        fontSize = 14.sp,
+                        fontSize = 18.sp,
                         color = Color.White,
-                        fontWeight = FontWeight.Thin,
+                        fontWeight = FontWeight.Medium,
                     )
                 },
 
@@ -154,7 +155,7 @@ fun ProfileScreen(
             )
             Spacer(modifier = Modifier.height(15.dp))
             Text(
-                //Tampilkan nama bolh
+                //Tampilkan nama boleh
                 text = stringResource(R.string.Email),
                 color = Color.White,
                 fontSize = 18.sp,
@@ -170,9 +171,9 @@ fun ProfileScreen(
                     Text(
                         //Tampilkan email
                         text = emailInput,
-                        fontSize = 14.sp,
+                        fontSize = 18.sp,
                         color = Color.White,
-                        fontWeight = FontWeight.Thin
+                        fontWeight = FontWeight.Medium
                     )
                 },
                 modifier = Modifier

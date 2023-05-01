@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ChangePasswordScreen(
-    context: Context,
+//    context: Context,
     navController: NavHostController = rememberNavController(),
     sharedViewModel: sharedViewModel,
 ) {
@@ -78,7 +78,7 @@ fun ChangePasswordScreen(
                 )
                 Text(
 
-                    text = stringResource(R.string.change),
+//                    text = stringResource(R.string.change),
 
                     text = stringResource(R.string.change_your),
 
@@ -90,7 +90,7 @@ fun ChangePasswordScreen(
                 )
                 Text(
 
-                    text = stringResource(R.string.psword),
+//                    text = stringResource(R.string.psword),
 
                     text = stringResource(R.string.Password),
 

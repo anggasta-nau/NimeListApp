@@ -74,7 +74,7 @@ fun SignUpScreen (
             )
             Text(
 
-                text = stringResource(R.string.create),
+//                text = stringResource(R.string.create),
 
                 text = stringResource(R.string.change_your),
 
@@ -86,7 +86,7 @@ fun SignUpScreen (
             )
             Text(
 
-                text = stringResource(R.string.accnt),
+//                text = stringResource(R.string.accnt),
 
                 text = stringResource(R.string.account),
 
