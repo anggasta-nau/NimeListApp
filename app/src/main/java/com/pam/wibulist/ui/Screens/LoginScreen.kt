@@ -201,6 +201,18 @@ fun LoginScreen(
                         }
                     }
                 }
+
+                //JIKA GAGAL
+                LaunchedEffect(key1 = state.value?.isError)
+                {
+                    scope.launch {
+                        if (state.value?.isError?.isNotEmpty()==true)
+                        {
+                            val error = state.value?.isError
+                            Toast.makeText(context, "${error}", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
             }
         }
     }

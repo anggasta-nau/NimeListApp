@@ -1,10 +1,17 @@
 package com.pam.wibulist.ui.Screens
 
+import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
 import com.pam.wibulist.models.AnimeTrendViewModel
 import com.pam.wibulist.ui.data.storedUsename
 import com.pam.wibulist.R
 import android.util.Log
 import android.widget.Space
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 
@@ -22,6 +29,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -34,11 +43,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.pam.wibulist.MainActivity
 import com.pam.wibulist.NavigationGraph.Screens
 import com.pam.wibulist.ui.theme.backgroundColor
 import com.pam.wibulist.ui.theme.buttonColor
+import com.pam.wibulist.utils.loginData
 import com.pam.wibulist.viewModel.sharedViewModel
 
 
@@ -46,15 +58,30 @@ import com.pam.wibulist.viewModel.sharedViewModel
 fun ProfileScreen(
     avm: AnimeTrendViewModel,
     sharedViewModel: sharedViewModel,
-    navController: NavController
+    navController: NavController,
+    onSubmitActionEvent: (img: ImageBitmap, context: Context, emailpic: String) -> Unit
 ) {
     val context = LocalContext.current
     val dataStore = storedUsename(context)
 
+    var takenImage by remember {
+        mutableStateOf(
+            BitmapFactory.decodeResource(context.resources, R.drawable.no_image_available_svg).asImageBitmap()
+        )
+    }
+
+    val takePictureContract = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.TakePicturePreview(),
+        onResult = { _takenImageBitmap ->
+            takenImage = _takenImageBitmap!!.asImageBitmap()
+        }
+    )
+
     var name by rememberSaveable { mutableStateOf("") }
     val scope = rememberCoroutineScope()
     val setUserInformation = sharedViewModel.person
-    val user = Firebase.auth.currentUser!!
+    val user = FirebaseAuth.getInstance()
+    var emailInput by remember { mutableStateOf("") }
     var usernameInput by remember { mutableStateOf("") }
 
     sharedViewModel.retrieveData(
@@ -62,6 +89,7 @@ fun ProfileScreen(
         context = context
     ) { data ->
         name = data.name
+        emailInput = data.email
     }
 
 
@@ -78,15 +106,15 @@ fun ProfileScreen(
 //                modifier = Modifier.padding(top = 20.dp)
 //            )
             Spacer(modifier = Modifier.height(20.dp))
-            Image(painter = painterResource(
-                id = R.drawable.ic_launcher_background),
-                contentDescription = null,
-                modifier = Modifier
+             Image(
+                 bitmap = takenImage,
+                 contentDescription = null,
+                 modifier = Modifier
                     .clip(CircleShape)
-            )
+             )
             Spacer(modifier = Modifier.height(10.dp))
             TextButton(
-                onClick = { /*TODO*/ }
+                onClick = { takePictureContract.launch() }
             ) {
                 Text(
                     text = "Edit Profile",
@@ -107,11 +135,11 @@ fun ProfileScreen(
             )
             Spacer(modifier = Modifier.height(5.dp))
             TextField(
-                value = usernameInput.toString(),
+                value = name,
                 onValueChange ={usernameInput = it},
                 label = {
                     Text(
-                        text = "$name",
+                        text = name,
                         fontSize = 14.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Thin,
@@ -139,7 +167,7 @@ fun ProfileScreen(
                 label = {
                     Text(
                         //Tampilkan email
-                        text = "isi email",
+                        text = emailInput,
                         fontSize = 14.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Thin
@@ -151,7 +179,11 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(15.dp))
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        user.signOut()
+                        context.startActivity(Intent(context, MainActivity::class.java))
+                        Toast.makeText(context, "Log Out Success", Toast.LENGTH_LONG).show()
+                    },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color(51, 133, 255,),
                         contentColor = Color.White
@@ -166,7 +198,10 @@ fun ProfileScreen(
                     )
                 }
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        onSubmitActionEvent(takenImage, context, emailInput)
+                        takenImage = BitmapFactory.decodeResource(context.resources, R.drawable.no_image_available_svg).asImageBitmap()
+                    },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color(51, 133, 255,),
                         contentColor = Color.White
