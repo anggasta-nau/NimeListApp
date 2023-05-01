@@ -31,6 +31,7 @@ import com.pam.wibulist.ui.theme.backgroundColor
 
 @Composable
 fun DetailScreen(
+    navController: NavController,
     id: String?,
     title: String?,
     imgUrl: String?,
@@ -50,7 +51,7 @@ fun DetailScreen(
         Column( modifier = Modifier.padding(20.dp)) {
             IconButton(
                 onClick = {
-
+                    navController.navigateUp() // navigasi ke screen sebelumnya
                 }
             ) {
                 Image(
@@ -58,6 +59,16 @@ fun DetailScreen(
                     contentDescription = null,
                 )
             }
+//            Spacer(modifier = Modifier.height(15.dp))
+
+            Text(
+                text = "$title",
+                style = MaterialTheme.typography.h5,
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+
             Spacer(modifier = Modifier.height(15.dp))
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -76,16 +87,10 @@ fun DetailScreen(
                         .height(400.dp)
                         .clip(RoundedCornerShape(10.dp))
                 )
-
-                Spacer(modifier = Modifier.height(15.dp))
-
-                Text(
-                    text = "$title",
-                    style = MaterialTheme.typography.h5,
-                    textAlign = TextAlign.Center,
-                    color = Color.White
-                )
             }
+
+            Spacer(modifier = Modifier.height(15.dp))
+
             Column() {
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(

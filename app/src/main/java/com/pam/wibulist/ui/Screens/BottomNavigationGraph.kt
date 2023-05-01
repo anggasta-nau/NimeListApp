@@ -44,6 +44,7 @@ import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.navigation.NavOptionsBuilder
 
 @Composable
 fun NavigationGraph(
@@ -151,7 +152,8 @@ fun NavigationGraph(
                 genre = navBackStackEntry.arguments?.getString("genre") ,
                 Deskripsi = navBackStackEntry.arguments?.getString("Deskripsi"),
                 rating = navBackStackEntry.arguments?.getString("rating"),
-                release = navBackStackEntry.arguments?.getString("release")
+                release = navBackStackEntry.arguments?.getString("release"),
+                navController = navController
 
 
             )
@@ -192,7 +194,9 @@ fun NavigationGraph(
                 title = navBackStackEntry.arguments?.getString("title") ,
                 imgUrl = navBackStackEntry.arguments?.getString("imgUrl") ,
                 genre = navBackStackEntry.arguments?.getString("genre") ,
-                Deskripsi = navBackStackEntry.arguments?.getString("Deskripsi")
+                Deskripsi = navBackStackEntry.arguments?.getString("Deskripsi"),
+                navController = navController
+
 //                rating = navBackStackEntry.arguments?.getString("rating")
 
             )
@@ -319,3 +323,4 @@ fun addData(imgUrl: String, context: Context, emailpic: String) = CoroutineScope
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
         }
 }
+

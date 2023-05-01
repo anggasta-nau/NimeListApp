@@ -18,13 +18,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import coil.size.Scale
 import com.pam.wibulist.R
 import com.pam.wibulist.ui.theme.backgroundColor
 
 @Composable
-fun DetailScreen2(id: String?, title: String?,imgUrl: String?, genre: String?, Deskripsi: String? ) {
+fun DetailScreen2(
+    navController: NavController,
+    id: String?,
+    title: String?,
+    imgUrl: String?,
+    genre: String?,
+    Deskripsi: String?
+){
 
     Column(
         modifier = Modifier
@@ -35,7 +43,7 @@ fun DetailScreen2(id: String?, title: String?,imgUrl: String?, genre: String?, D
         Column( modifier = Modifier.padding(20.dp)) {
             IconButton(
                 onClick = {
-
+                    navController.navigateUp() // navigasi ke screen sebelumnya
                 }
             ) {
                 Image(
@@ -43,6 +51,17 @@ fun DetailScreen2(id: String?, title: String?,imgUrl: String?, genre: String?, D
                     contentDescription = null,
                 )
             }
+
+//            Spacer(modifier = Modifier.height(15.dp))
+
+            Text(
+                text = "$title",
+                style = MaterialTheme.typography.h5,
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+
             Spacer(modifier = Modifier.height(15.dp))
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,16 +80,10 @@ fun DetailScreen2(id: String?, title: String?,imgUrl: String?, genre: String?, D
                         .height(400.dp)
                         .clip(RoundedCornerShape(10.dp))
                 )
-
-                Spacer(modifier = Modifier.height(15.dp))
-
-                Text(
-                    text = "$title",
-                    style = MaterialTheme.typography.h5,
-                    textAlign = TextAlign.Center,
-                    color = Color.White
-                )
             }
+
+            Spacer(modifier = Modifier.height(15.dp))
+
             Column() {
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
