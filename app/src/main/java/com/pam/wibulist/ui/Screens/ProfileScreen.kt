@@ -184,7 +184,7 @@ fun ProfileScreen(
                     onClick = {
                         user.signOut()
                         context.startActivity(Intent(context, MainActivity::class.java))
-                        Toast.makeText(context, "Log Out Success", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, context.getString(R.string.log_out_success), Toast.LENGTH_LONG).show()
                     },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color(51, 133, 255,),

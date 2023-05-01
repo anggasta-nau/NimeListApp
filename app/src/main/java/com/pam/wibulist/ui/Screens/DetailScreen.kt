@@ -89,7 +89,7 @@ fun DetailScreen(
             Column() {
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = stringResource(R.string.genre),
+                    text = stringResource(R.string.genres),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White,

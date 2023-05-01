@@ -56,8 +56,19 @@
     <string name="save_profile">Simpan Profil</string>
     <string name="trend_s_now">Sedang Trending</string>
     <string name="rate_4_5">Nilai 4/5</string>
+
     <string name="change">Ubah</string>
     <string name="psword">Kata Sandi</string>
     <string name="create">Buat</string>
     <string name="accnt">Akun Anda</string>
+
+    <string name="profile_saved">Profil Disimpan</string>
+    <string name="failed_to_add_data">gagal menambahkan data</string>
+    <string name="password_has_been_change_please_login_again">Kata sandi telah diubah, silakan Masuk kembali!!</string>
+    <string name="make_sure_your_password_and_your_confirm_password_match">Pastikan Kata Sandi Anda dan Konfirmasi Kata Sandi Anda cocok</string>
+    <string name="log_out_success">Keluar Berhasil</string>
+    <string name="change_your">Ubah</string>
+    <string name="account">Akun</string>
+    <string name="genres">Genre</string>
+
 </resources>

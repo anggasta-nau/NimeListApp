@@ -21,6 +21,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.pam.wibulist.NavigationGraph.Screens
+import com.pam.wibulist.R
 import com.pam.wibulist.models.AnimeActViewModel
 import com.pam.wibulist.models.AnimeActionViewModel
 import com.pam.wibulist.models.AnimeBannerViewModel
@@ -291,7 +292,7 @@ fun uploadImage(img: ImageBitmap, context: Context, emailpic: String)
             val downloadUri = task.result
             addData(downloadUri.toString(), context = context, emailpic)
         } else {
-            Toast.makeText(context, "failed to add data", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.failed_to_add_data), Toast.LENGTH_SHORT).show()
             // Handle failures
             // ...failures
         }
@@ -312,7 +313,7 @@ fun addData(imgUrl: String, context: Context, emailpic: String) = CoroutineScope
     fFirestore.collection("images")
         .add(data)
         .addOnSuccessListener { documentReference ->
-            Toast.makeText(context, "Profile Saved", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.profile_saved), Toast.LENGTH_SHORT).show()
         }
         .addOnFailureListener { e ->
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()

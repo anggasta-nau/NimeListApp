@@ -73,7 +73,11 @@ fun SignUpScreen (
                     .height(100.dp)
             )
             Text(
+
                 text = stringResource(R.string.create),
+
+                text = stringResource(R.string.change_your),
+
                 fontSize = 32.sp,
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold,
@@ -81,7 +85,11 @@ fun SignUpScreen (
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)
             )
             Text(
+
                 text = stringResource(R.string.accnt),
+
+                text = stringResource(R.string.account),
+
                 fontSize = 32.sp,
                 color = MaterialTheme.colors.buttonColor,
                 fontWeight = FontWeight.SemiBold,
