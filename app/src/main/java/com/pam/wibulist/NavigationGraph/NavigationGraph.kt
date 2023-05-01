@@ -37,7 +37,7 @@ fun NavigationGraph(
             BottomNavigationMainScreenView(sharedViewModel = sharedViewModel)
         }
         composable(route = Screens.ChangePasswordScreen.route) {
-            ChangePasswordScreen( navController = navController, sharedViewModel = sharedViewModel)
+            ChangePasswordScreen( navController = navController,sharedViewModel =sharedViewModel)
         }
         composable(route = Screens.LoginScreen.route) {
             LoginScreen(navController = navController, sharedViewModel = sharedViewModel)

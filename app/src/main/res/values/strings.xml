@@ -55,4 +55,8 @@
     <string name="save_profile">Save Profile</string>
     <string name="trend_s_now">Trend\'s Now</string>
     <string name="rate_4_5">Rate 4/5</string>
+    <string name="change">Change Your</string>
+    <string name="psword">Password</string>
+    <string name="create">Create Your</string>
+    <string name="accnt">Account</string>
 </resources>

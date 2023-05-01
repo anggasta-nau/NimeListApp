@@ -56,4 +56,8 @@
     <string name="save_profile">Simpan Profil</string>
     <string name="trend_s_now">Sedang Trending</string>
     <string name="rate_4_5">Nilai 4/5</string>
+    <string name="change">Ubah</string>
+    <string name="psword">Kata Sandi</string>
+    <string name="create">Buat</string>
+    <string name="accnt">Akun Anda</string>
 </resources>

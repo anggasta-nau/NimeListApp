@@ -48,14 +48,14 @@ fun ChangePasswordScreen(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val setUserInformation = sharedViewModel.person
-    val user = Firebase.auth.currentUser!!
 
+    val user = Firebase.auth.currentUser!!
 //    if (user != null) {
 //        sharedViewModel.retrieveData(
 //            email = setUserInformation!!.email,
 //            context = context
 //        ) { data ->
-//            name = data.name
+////            name = data.name
 //        }
 
         //JIKA USER Lupa Password
@@ -75,7 +75,7 @@ fun ChangePasswordScreen(
                         .height(100.dp)
                 )
                 Text(
-                    text = stringResource(R.string.welcome),
+                    text = stringResource(R.string.change),
                     fontSize = 32.sp,
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
@@ -83,7 +83,7 @@ fun ChangePasswordScreen(
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)
                 )
                 Text(
-                    text = stringResource(R.string.back),
+                    text = stringResource(R.string.psword),
                     fontSize = 32.sp,
                     color = MaterialTheme.colors.buttonColor,
                     fontWeight = FontWeight.SemiBold,

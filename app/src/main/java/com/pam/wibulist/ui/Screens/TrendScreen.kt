@@ -99,7 +99,7 @@ fun AvmList(avl: List<AnimeBannerModel>, itemClick: (index: Int, title: String, 
                                 item.genre,
                                 item.Deskripsi,
                                 item.rating,
-                                item.release,
+                                item.release
                             )
                         }
                 ) {
