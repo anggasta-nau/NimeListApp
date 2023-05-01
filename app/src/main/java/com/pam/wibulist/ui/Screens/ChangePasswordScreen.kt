@@ -1,5 +1,6 @@
 package com.pam.wibulist.ui.Screens
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,6 +39,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ChangePasswordScreen(
+    context: Context,
     navController: NavHostController = rememberNavController(),
     sharedViewModel: sharedViewModel,
 ) {
@@ -159,14 +161,14 @@ fun ChangePasswordScreen(
                                     navController.navigate(route = Screens.LoginScreen.route)
                                     Toast.makeText(
                                         context,
-                                        "Password has been change, please Login again!!",
+                                        context.getString(R.string.password_has_been_change_please_login_again),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
                             } else {
                                 Toast.makeText(
                                     context,
-                                    "Make sure your Password and your Confirm Password match",
+                                    context.getString(R.string.make_sure_your_password_and_your_confirm_password_match),
                                     Toast.LENGTH_LONG
                                 ).show()
                             }

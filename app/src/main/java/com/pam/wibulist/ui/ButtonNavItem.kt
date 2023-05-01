@@ -12,7 +12,12 @@ open class ButtonNavItem (
     val icon: ImageVector,
     val screen_route: String,
 ){
-    object Home: ButtonNavItem("Home", Icons.Default.Home, screen_route = "Home")
+    object Home: ButtonNavItem(
+        title = "Home", // pass your string value here
+        icon = Icons.Default.Home,
+        screen_route = "Home"
+    )
+
     object Search: ButtonNavItem("Search", Icons.Default.Search, screen_route = "Search")
     object Trend: ButtonNavItem("Trend", Icons.Default.Star, screen_route = "Trend")
     object Profile: ButtonNavItem("Profile", Icons.Default.AccountCircle, screen_route = "Profile")

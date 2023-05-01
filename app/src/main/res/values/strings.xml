@@ -55,4 +55,9 @@
     <string name="save_profile">Save Profile</string>
     <string name="trend_s_now">Trend\'s Now</string>
     <string name="rate_4_5">Rate 4/5</string>
+    <string name="profile_saved">Profile Saved</string>
+    <string name="failed_to_add_data">failed to add data</string>
+    <string name="password_has_been_change_please_login_again">Password has been change, please Login again!!</string>
+    <string name="make_sure_your_password_and_your_confirm_password_match">Make sure your Password and your Confirm Password match</string>
+    <string name="log_out_success">Log Out Success</string>
 </resources>
