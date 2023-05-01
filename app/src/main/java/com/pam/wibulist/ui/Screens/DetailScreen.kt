@@ -72,7 +72,7 @@ fun DetailScreen(
             Spacer(modifier = Modifier.height(15.dp))
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
                 Image(
                     painter = rememberImagePainter(
@@ -91,7 +91,7 @@ fun DetailScreen(
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Column() {
+            Column(modifier = Modifier.padding(start = 30.dp, end = 30.dp)) {
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
                     text = stringResource(R.string.genres),

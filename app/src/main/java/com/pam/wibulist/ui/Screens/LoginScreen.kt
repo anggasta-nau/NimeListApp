@@ -129,9 +129,9 @@ fun LoginScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.forgot_password),
-                        fontWeight = FontWeight.Thin,
+                        fontWeight = FontWeight.Bold,
                         color = Color.Black,
-                        fontSize = 12.sp
+                        fontSize = 16.sp
                     )
                 }
 
@@ -154,7 +154,7 @@ fun LoginScreen(
                     Text(
                         text = stringResource(R.string.Login),
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         color = Color.White
                     )
                 }
@@ -168,9 +168,9 @@ fun LoginScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.dnthvacc),
-                        fontWeight = FontWeight.Thin,
+                        fontWeight = FontWeight.Normal,
                         color = Color.Black,
-                        fontSize = 12.sp
+                        fontSize = 16.sp
                     )
                 }
                 //LOADING
