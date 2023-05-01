@@ -68,7 +68,11 @@ fun ChangePasswordScreen(
                 Image(
                     painter = painterResource(id = R.drawable.group_27_removebg_preview),
                     contentDescription = null,
-                    modifier = Modifier.padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                    modifier = Modifier
+                        .padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                        .align(Alignment.End)
+                        .width(150.dp)
+                        .height(100.dp)
                 )
                 Text(
                     text = stringResource(R.string.welcome),
@@ -108,7 +112,7 @@ fun ChangePasswordScreen(
                         label = { Text(text = stringResource(R.string.Email)) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = MaterialTheme.colors.buttonColor,
-                            unfocusedBorderColor = Color.LightGray,
+                            unfocusedBorderColor = Color.Black.copy(0.7f),
                             focusedLabelColor = MaterialTheme.colors.buttonColor
                         ),
                         shape = RoundedCornerShape(20.dp),
@@ -123,7 +127,7 @@ fun ChangePasswordScreen(
                         label = { Text(text = stringResource(R.string.Password)) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = MaterialTheme.colors.buttonColor,
-                            unfocusedBorderColor = Color.LightGray,
+                            unfocusedBorderColor = Color.Black.copy(0.7f),
                             focusedLabelColor = MaterialTheme.colors.buttonColor
                         ),
                         shape = RoundedCornerShape(20.dp),
@@ -139,7 +143,7 @@ fun ChangePasswordScreen(
                         label = { Text(text = stringResource(R.string.CPaswoord)) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = MaterialTheme.colors.buttonColor,
-                            unfocusedBorderColor = Color.LightGray,
+                            unfocusedBorderColor = Color.Black.copy(0.7f),
                             focusedLabelColor = MaterialTheme.colors.buttonColor
                         ),
                         shape = RoundedCornerShape(20.dp),
@@ -187,19 +191,20 @@ fun ChangePasswordScreen(
                             color = Color.White
                         )
                     }
+                    Spacer(modifier = Modifier.height(15.dp))
                     //KE HALAMAN LOGIN
                     TextButton(
                         onClick = {
                             //getEmailFromSignUpForm.launch("")
                             navController.navigate(route = Screens.LoginScreen.route)
                         },
-                        modifier = Modifier.align(Alignment.End)
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
                     ) {
                         Text(
                             text = stringResource(R.string.alrdyhvacc),
                             fontWeight = FontWeight.Thin,
                             color = Color.Black,
-                            fontSize = 16.sp
+                            fontSize = 14.sp
                         )
                     }
                 }
