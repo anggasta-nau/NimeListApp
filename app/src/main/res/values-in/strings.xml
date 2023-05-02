@@ -71,5 +71,10 @@
     <string name="account">Akun</string>
     <string name="genres">Genre</string>
     <string name="edit_photo_profile">Edit Foto Profil</string>
+    <string name="save_password">Simpan Password</string>
+    <string name="password_has_been_changed_please_login_again">Kata sandi telah diubah, silakan Masuk kembali!!</string>
+    <string name="make_sure_your_password_lenght_more_than_6">Pastikan panjang kata sandi Anda lebih dari 6</string>
+    <string name="confirm_password">Konfirmasi Sandi</string>
+    <string name="password">Sandi</string>
 
 </resources>

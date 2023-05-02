@@ -117,13 +117,7 @@ fun ProfileScreen(
                 }
 
         )
-//            Text(
-//                text = "Profile",
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.SemiBold,
-//                color = Color.White,
-//                modifier = Modifier.padding(top = 20.dp)
-//            )
+
         Spacer(modifier = Modifier.height(20.dp))
         Image(
             bitmap = takenImage,
@@ -202,7 +196,7 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(15.dp))
             Text(
                 //password
-                text = "Password",
+                text = stringResource(R.string.password),
                 color = Color.White,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -215,7 +209,7 @@ fun ProfileScreen(
                 label = {
                     Text(
                         //Tampilkan Password
-                        text = "Password",
+                        text = stringResource(R.string.Password),
                         fontSize = 16.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Thin
@@ -230,7 +224,7 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(15.dp))
             Text(
                 //password
-                text = "Confirm Password",
+                text = stringResource(R.string.confirm_password),
                 color = Color.White,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -243,7 +237,7 @@ fun ProfileScreen(
                 label = {
                     Text(
                         //Tampilkan Password
-                        text = "Confirm Password",
+                        text = stringResource(R.string.confirm_password),
                         fontSize = 16.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Thin
@@ -265,7 +259,7 @@ fun ProfileScreen(
                         {
                             if (password.length < 6)
                             {
-                                Toast.makeText(context, "Make sure your password lenght more than 6", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, context.getString(R.string.make_sure_your_password_lenght_more_than_6), Toast.LENGTH_LONG).show()
                             }
                             else
                             {
@@ -273,12 +267,12 @@ fun ProfileScreen(
                                 user.updatePassword(password)
                                 user1.signOut()
                                 context.startActivity(Intent(context, MainActivity::class.java))
-                                Toast.makeText(context, "Password has been changed, please Login again!", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, context.getString(R.string.password_has_been_changed_please_login_again), Toast.LENGTH_LONG).show()
                             }
                         }
                         else
                         {
-                            Toast.makeText(context, "Make sure your password and confirm password match", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, context.getString(R.string.make_sure_your_password_and_your_confirm_password_match), Toast.LENGTH_LONG).show()
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -287,7 +281,7 @@ fun ProfileScreen(
                     )
                 ) {
                     Text(
-                        text = "Save Password",
+                        text = stringResource(R.string.save_password),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,

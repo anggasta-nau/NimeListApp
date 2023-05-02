@@ -70,5 +70,10 @@
     <string name="account">account</string>
     <string name="genres">Genre</string>
     <string name="edit_photo_profile">Edit Photo Profile</string>
+    <string name="save_password">Save Password</string>
+    <string name="password_has_been_changed_please_login_again">Password has been changed, please Login again!</string>
+    <string name="make_sure_your_password_lenght_more_than_6">Make sure your password lenght more than 6</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
 
 </resources>

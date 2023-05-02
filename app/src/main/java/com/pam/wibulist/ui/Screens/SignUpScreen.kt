@@ -74,7 +74,6 @@ fun SignUpScreen (
             )
             Text(
 
-//                text = stringResource(R.string.create),
 
                 text = stringResource(R.string.change_your),
 
@@ -86,7 +85,6 @@ fun SignUpScreen (
             )
             Text(
 
-//                text = stringResource(R.string.accnt),
 
                 text = stringResource(R.string.account),
 
@@ -180,7 +178,7 @@ fun SignUpScreen (
                         }
                         else
                         {
-                            Toast.makeText(context, "Make sure your Password and your Confirm Password match", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, context.getString(R.string.make_sure_your_password_and_your_confirm_password_match), Toast.LENGTH_LONG).show()
                         }
                     },
                     colors = ButtonDefaults.buttonColors(

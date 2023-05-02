@@ -78,7 +78,6 @@ fun ChangePasswordScreen(
                 )
                 Text(
 
-//                    text = stringResource(R.string.change),
 
                     text = stringResource(R.string.change_your),
 
@@ -90,7 +89,6 @@ fun ChangePasswordScreen(
                 )
                 Text(
 
-//                    text = stringResource(R.string.psword),
 
                     text = stringResource(R.string.Password),
 
