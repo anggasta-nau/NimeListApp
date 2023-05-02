@@ -138,7 +138,7 @@ fun ProfileScreen(
             onClick = { takePictureContract.launch() }
         ) {
             Text(
-                text = stringResource(R.string.edit_profile),
+                text = stringResource(R.string.edit_photo_profile),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
                 color = Color.White,
