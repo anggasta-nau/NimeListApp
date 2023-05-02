@@ -75,5 +75,6 @@
     <string name="make_sure_your_password_lenght_more_than_6">Make sure your password lenght more than 6</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="password">Password</string>
+    <string name="make">Make</string>
 
 </resources>

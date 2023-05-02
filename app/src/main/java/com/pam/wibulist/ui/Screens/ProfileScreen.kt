@@ -282,7 +282,7 @@ fun ProfileScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.save_password),
-                        fontSize = 16.sp,
+                        fontSize = 15.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,
                         fontFamily = FontFamily.SansSerif
@@ -303,7 +303,7 @@ fun ProfileScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.save_profile),
-                        fontSize = 16.sp,
+                        fontSize = 15.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = Color.White,
                         fontFamily = FontFamily.SansSerif

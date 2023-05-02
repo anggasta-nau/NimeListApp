@@ -76,5 +76,6 @@
     <string name="make_sure_your_password_lenght_more_than_6">Pastikan panjang kata sandi Anda lebih dari 6</string>
     <string name="confirm_password">Konfirmasi Sandi</string>
     <string name="password">Sandi</string>
+    <string name="make">Buat</string>
 
 </resources>

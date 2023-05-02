@@ -75,7 +75,7 @@ fun SignUpScreen (
             Text(
 
 
-                text = stringResource(R.string.change_your),
+                text = stringResource(R.string.make),
 
                 fontSize = 32.sp,
                 color = Color.White,
@@ -207,7 +207,7 @@ fun SignUpScreen (
                 ) {
                     Text(
                         text = stringResource(R.string.alrdyhvacc),
-                        fontWeight = FontWeight.Thin,
+                        fontWeight = FontWeight.Normal,
                         color = Color.Black,
                         fontSize = 14.sp
                     )
